@@ -20,7 +20,7 @@
         <!--#region Buyers -->
         <ListView Foreground="White" FontSize="20" ItemsSource="{Binding Buyers, UpdateSourceTrigger=PropertyChanged}"
                   FontFamily="Courier New" Margin="5" ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                  Name="List" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
+                  Name="List" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedBuyerIndex, UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -120,7 +120,7 @@
                                     <GridViewColumn Header="Название"  Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <ComboBox ItemsSource="{Binding EquipmentsInfoNames, UpdateSourceTrigger=PropertyChanged}"  
+                                                <ComboBox ItemsSource="{Binding EquipmentsInfo, UpdateSourceTrigger=PropertyChanged}"  
                                                           Width="Auto" MinWidth="50" BorderBrush="White" Background="#1b1c1b"
                                                           HorizontalAlignment="Center"
                                                           Name="EquipmentInfoBox" DataContext="{x:Static local:App.MainPageVM}">
@@ -183,7 +183,7 @@
                                     <GridViewColumn Header="Сумма" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
                                         <GridViewColumn.CellTemplate >
                                             <DataTemplate>
-                                                <TextBlock Text="5"  VerticalAlignment="Center"
+                                                <TextBlock Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center"
                                        HorizontalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -191,7 +191,7 @@
                                     <GridViewColumn Header="Стоимость(м)" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="5"  VerticalAlignment="Center" 
+                                                <TextBlock  Text="{Binding MyCost, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" 
                                        HorizontalAlignment="Center" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -199,7 +199,7 @@
                                     <GridViewColumn Header="Сумма(м)" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="5"  VerticalAlignment="Center" 
+                                                <TextBlock Text="{Binding MySum, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" 
                                        HorizontalAlignment="Center" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -207,7 +207,7 @@
                                     <GridViewColumn Header="Разность" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="5"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Diff, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

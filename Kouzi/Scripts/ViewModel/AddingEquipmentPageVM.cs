@@ -57,7 +57,9 @@ namespace Kouzi.Scripts.ViewModel
                     {
                         Equipment resultEquip = new Equipment() { Cost = int.Parse(Cost), MyCost = int.Parse(MyCost), Name = this.Name };
                         App.MainPageVM.EquipmentsInfo.Add(resultEquip);
-                        App.MainPageVM.EquipmentsInfoNames.Add(resultEquip.Name);
+                        MyCost = "0";
+                        Cost = "0";
+                        Name = null;
                         new NavigateVM().Navigate("Scripts/View/MainPage.xaml");
                     }
                 }));

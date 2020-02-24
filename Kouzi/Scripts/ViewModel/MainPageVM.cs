@@ -155,9 +155,25 @@ namespace Kouzi.Scripts.ViewModel
         {
             get
             {
-                return removeBuyerCommand ?? (removeBuyerCommand = new RelayCommand(obj =>
+                return removeEquipmentInfoCommand ?? (removeEquipmentInfoCommand = new RelayCommand(obj =>
                 {
-                    EquipmentsInfo.Remove((Equipment)obj);
+                    Equipment equip = (Equipment)obj;
+                    EquipmentsInfo.Remove(equip);
+                    for(int i = 0; i < Buyers.Count; i++)
+                    {
+                        for(int k = 0; k < Buyers[i].EquipmentList.Count; k++)
+                        {
+                            Equipment e = Buyers[i].EquipmentList[k];
+                            if (e != null)
+                            {
+                                if (equip.Cost == e.Cost && equip.MyCost == e.MyCost && equip.Name == e.Name)
+                                {
+                                    Buyers[i].EquipmentList.Remove(e);
+                                    Buyers[i].EquipmentList.AddEquipment(new Equipment(), Buyers[i].Index);
+                                }
+                            }
+                        }
+                    }
                 }));
             }
         }
@@ -173,10 +189,10 @@ namespace Kouzi.Scripts.ViewModel
             {
                 return selectEquipmentInfoCommand ?? (selectEquipmentInfoCommand = new RelayCommand(obj => 
                 {
-                    var a = obj;
-                    Equipment equip = (Equipment)obj;
-                    int index = int.Parse(equip.BuyerIndex.Replace(".", "")) - 1;
-                    
+                    Equipment equip = (Equipment)((FindCommandParameters)obj).Parameter1;
+                    int equipmentIndex = (int)((FindCommandParameters)obj).Parameter2;
+                    if(equip != null)
+                       Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex] = (Equipment)equip.Clone();
                 }));
             }
         }
@@ -187,14 +203,23 @@ namespace Kouzi.Scripts.ViewModel
 
         #region Properties
 
-        #region EquipmentsInfo
-        public ObservableCollection<Equipment> EquipmentsInfo { get; set; } = new ObservableCollection<Equipment>();
+        #region SelectedBuyerIndex
+
+        private int selectedBuyerIndex;
+        public int SelectedBuyerIndex
+        {
+            get => selectedBuyerIndex;
+            set
+            {
+                selectedBuyerIndex = value;
+                OnPropertyChanged("SelectedBuyerIndex");
+            }
+        }
+
         #endregion
 
-        #region EquipmentsInfoNames
-
-        public ObservableCollection<string> EquipmentsInfoNames { get; set; } = new ObservableCollection<string>();
-
+        #region EquipmentsInfo
+        public ObservableCollection<Equipment> EquipmentsInfo { get; set; } = new ObservableCollection<Equipment>();
         #endregion
 
         #region Buyers

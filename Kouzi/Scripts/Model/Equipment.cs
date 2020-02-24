@@ -8,25 +8,10 @@ using System.Threading.Tasks;
 
 namespace Kouzi.Scripts.Model
 {
-    public class Equipment : INotifyPropertyChanged
+    public class Equipment : INotifyPropertyChanged, ICloneable
     {
 
         #region Properties
-
-        #region EquipmentIndex
-
-        private int equipmentIndex;
-        public  int EquipmentIndex
-        {
-            get => App.MainPageVM.Buyers[int.Parse(BuyerIndex.Replace(".", "")) - 1].EquipmentList.IndexOf(this);
-            set
-            {
-                equipmentIndex = value;
-                OnPropertyChanged("EquipmentIndex");
-            }
-        }
-
-        #endregion
 
         #region BuyerIndex
 
@@ -45,20 +30,28 @@ namespace Kouzi.Scripts.Model
 
         #region Difference
 
+        private int diff;
         public int Diff
         {
-            get => Sum - MySum;
+            get => diff;
+            set
+            {
+                diff = value;
+                OnPropertyChanged("Diff");
+            }
         }
 
         #endregion
 
         #region MySum
 
+        private int mySum;
         public int MySum
         {
-            get => Count * MyCost;
+            get => mySum;
             set
             {
+                mySum = value;
                 OnPropertyChanged("MySum");
             }
         }
@@ -82,11 +75,13 @@ namespace Kouzi.Scripts.Model
 
         #region Sum
 
+        private int sum;
         public int Sum
         {
-            get => Cost * Count;
+            get => sum;
             set
             {
+                sum = value;
                 OnPropertyChanged("Sum");
             }
         }
@@ -110,13 +105,26 @@ namespace Kouzi.Scripts.Model
 
         #region Count
 
-        private int count;
-        public int Count
+        private void SetValues()
+        {
+            int temp;
+            if (int.TryParse(Count, out temp))
+            {
+                int _count = int.Parse(Count);
+                Sum = _count * Cost;
+                MySum = _count * MyCost;
+                Diff = Sum - MySum;
+            }
+        }
+
+        private string count = "0";
+        public string Count
         {
             get => count;
             set
             {
                 count = value;
+                SetValues();
                 OnPropertyChanged("Count");
             }
         }
@@ -142,9 +150,28 @@ namespace Kouzi.Scripts.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-        #endregion
+
 
         #endregion
 
+        #endregion
+
+        #region Clone
+
+        public object Clone()
+        {
+            return base.MemberwiseClone();
+        }
+
+        #endregion
+
+        #region ToString
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        #endregion
     }
 }
