@@ -201,10 +201,6 @@ namespace Kouzi.Scripts.ViewModel
         }
         #endregion
 
-
-
-
-
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

@@ -60,13 +60,13 @@
                             <!--#endregion-->
 
                             <!--#region Date -->
-                            <DatePicker SelectedDateFormat="Long" Margin="20 0"  FontSize="20"
+                            <DatePicker SelectedDateFormat="Short" Margin="20 0"  FontSize="20"
                                     BorderBrush="LightGray"
                                     Foreground="LightGray"
                                     Background="Transparent"
                                     VerticalAlignment="Center"
                                     Style="{StaticResource DatePickerStyle}" DockPanel.Dock="Left"
-                                    Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}"/>
+                                    Text="{Binding Date, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                             <!--#endregion-->
 
@@ -121,8 +121,8 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <ComboBox ItemsSource="{Binding EquipmentsInfo, UpdateSourceTrigger=PropertyChanged}"  
-                                                          Width="Auto" MinWidth="50" BorderBrush="White" Background="#1b1c1b"
-                                                          HorizontalAlignment="Center"
+                                                          Width="Auto" MinWidth="50" BorderBrush="White" 
+                                                          HorizontalAlignment="Center" Background="#1b1c1b"
                                                           Name="EquipmentInfoBox" DataContext="{x:Static local:App.MainPageVM}">
                                                     <ComboBox.ContextMenu>
                                                         <ContextMenu Style="{StaticResource MaterialDesignMenu}"
@@ -215,6 +215,15 @@
                             </ListView.View>
                         </ListView>
                         <!--#endregion-->
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBox   PreviewTextInput="NumberTextBox"
+                                  BorderBrush="White" Width="Auto" materialDesign:HintAssist.Hint="Кредит"
+                                       Text="{Binding Credit, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox PreviewTextInput="NumberTextBox" Margin="10 0"
+                                  BorderBrush="White" Width="Auto" materialDesign:HintAssist.Hint="Дебет"
+                                     Text="{Binding Debit, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
                         <Separator Margin="0 15"/>
                     </StackPanel>
                 </DataTemplate>

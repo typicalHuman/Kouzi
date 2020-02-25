@@ -11,25 +11,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Serialization;
 
 namespace Kouzi.Scripts.ViewModel
 {
     public class MainPageVM : INotifyPropertyChanged, ISave
     {
 
-
         #region Save
         public void Save()
         {
             new XML<string>().Serialize(BuyersNames, "BuyersNamesData.xml");
+            new XML<Equipment>().Serialize(EquipmentsInfo, "EquipmentsInfoData.xml");
         }
         #endregion
 
         #region Constructor
         public MainPageVM()
         {
-            BuyersNames = (ObservableCollection<string>)new XML<string>().Deserialize("BuyersNamesData.xml");
-            BuyersNames = BuyersNames ?? new ObservableCollection<string>();
+            //initalizing from xml documents
+            BuyersNames = (ObservableCollection<string>)new XML<string>().Deserialize("BuyersNamesData.xml") ?? 
+                new ObservableCollection<string>();
+            EquipmentsInfo = (ObservableCollection<Equipment>)new XML<Equipment>().Deserialize("EquipmentsInfoData.xml") ??
+                new ObservableCollection<Equipment>();
         }
 
         public void TestBuyers()
@@ -243,6 +247,21 @@ namespace Kouzi.Scripts.ViewModel
 
         #region BuyersNames
         public ObservableCollection<string> BuyersNames { get; set; } = new ObservableCollection<string>();
+        #endregion
+
+        #region AddButtonVisibility
+
+        private Visibility addButtonVisibility;
+        public Visibility AddButtonVisibility
+        {
+            get => addButtonVisibility;
+            set
+            {
+                addButtonVisibility = value;
+                OnPropertyChanged("AddButtonVisibility");
+            }
+        }
+
         #endregion
 
         #region OnPropertyChanged

@@ -50,3 +50,7 @@ E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\AddingEquipmentPage.baml
 E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\Controls\BackButton.g.cs
 E:\Projects\Kouzi\Kouzi\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\Controls\BackButton.baml
+E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\BuyersResultPage.g.cs
+E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\EquipmentsResultPage.g.cs
+E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\BuyersResultPage.baml
+E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\EquipmentsResultPage.baml

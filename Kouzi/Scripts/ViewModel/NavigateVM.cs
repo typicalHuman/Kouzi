@@ -18,6 +18,10 @@ namespace Kouzi.Scripts.ViewModel
         public string Title { get; set; }
         public void Navigate(string url)
         {
+            if (url.Contains("Main"))
+                App.MainPageVM.AddButtonVisibility = System.Windows.Visibility.Visible;
+            else
+                App.MainPageVM.AddButtonVisibility = System.Windows.Visibility.Collapsed;
             Messenger.Default.Send<NavigateArgs>(new NavigateArgs(url));
         }
     }

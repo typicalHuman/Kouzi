@@ -153,25 +153,40 @@
                           FontSize="16" SelectedIndex="{Binding SelectedIndex}">
                     <ListViewItem Height="40">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="DriveDocument" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            <materialDesign:PackIcon Kind="TableLarge" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                      Margin="5 0"/>
-                            <TextBlock Text="Покупатели" VerticalAlignment="Center" Margin="10 0"/>
+                            <TextBlock Text="Общая таблица" VerticalAlignment="Center" Margin="10 0"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction/>
+                                <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                                       CommandParameter="Scripts/View/MainPage.xaml"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
                     <ListViewItem Height="40">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Finance"  Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            <materialDesign:PackIcon Kind="Radiator"  Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                      Margin="5 0"/>
-                            <TextBlock Text="Итоги" VerticalAlignment="Center" Margin="10 0"/>
+                            <TextBlock Text="Оборудование" VerticalAlignment="Center" Margin="10 0"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction/>
+                                <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                                       CommandParameter="Scripts/View/EquipmentsResultPage.xaml"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="People" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                     Margin="5 0"/>
+                            <TextBlock Text="Покупатели" VerticalAlignment="Center" Margin="10 0"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Selected">
+                                <i:InvokeCommandAction Command="{Binding NavigateCommand}"
+                                                       CommandParameter="Scripts/View/BuyersResultPage.xaml"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
@@ -189,7 +204,7 @@
         <Button Height="40" Width="150" Background="#32CD32" Content="{materialDesign:PackIcon Kind=Add,Size=30}"
                     Foreground="White" HorizontalAlignment="Center" ToolTip="Добавить покупателя"
                     Style="{StaticResource MaximizeButtonStyle}" Grid.ColumnSpan="5" Grid.Column="1"
-                DataContext="{x:Static local:App.MainPageVM}">
+                DataContext="{x:Static local:App.MainPageVM}" Visibility="{Binding AddButtonVisibility}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <i:InvokeCommandAction Command="{Binding AddBuyerCommand}"/>

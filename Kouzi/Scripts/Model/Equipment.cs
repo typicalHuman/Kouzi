@@ -5,17 +5,19 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Kouzi.Scripts.Model
 {
+    [Serializable]
     public class Equipment : INotifyPropertyChanged, ICloneable
     {
-
         #region Properties
 
         #region BuyerIndex
 
         private string buyerIndex;
+        [XmlElement]
         public string BuyerIndex
         {
             get => buyerIndex;
@@ -31,6 +33,7 @@ namespace Kouzi.Scripts.Model
         #region Difference
 
         private int diff;
+        [XmlElement]
         public int Diff
         {
             get => diff;
@@ -46,6 +49,7 @@ namespace Kouzi.Scripts.Model
         #region MySum
 
         private int mySum;
+        [XmlElement]
         public int MySum
         {
             get => mySum;
@@ -61,6 +65,7 @@ namespace Kouzi.Scripts.Model
         #region MyCost
 
         private int myCost;
+        [XmlElement]
         public int MyCost
         {
             get => myCost;
@@ -76,6 +81,7 @@ namespace Kouzi.Scripts.Model
         #region Sum
 
         private int sum;
+        [XmlElement]
         public int Sum
         {
             get => sum;
@@ -91,6 +97,7 @@ namespace Kouzi.Scripts.Model
         #region Cost
 
         private int cost;
+        [XmlElement]
         public int Cost
         {
             get => cost;
@@ -118,6 +125,7 @@ namespace Kouzi.Scripts.Model
         }
 
         private string count = "0";
+        [XmlElement]
         public string Count
         {
             get => count;
@@ -133,6 +141,7 @@ namespace Kouzi.Scripts.Model
 
         #region Name
         private string name;
+        [XmlElement]
         public string Name
         {
             get => name;

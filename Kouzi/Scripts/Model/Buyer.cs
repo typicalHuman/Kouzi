@@ -105,6 +105,36 @@ namespace Kouzi.Scripts.Model
 
         #endregion
 
+        #region Credit
+
+        private string credit;
+        public string Credit
+        {
+            get => credit;
+            set
+            {
+                credit = value;
+                OnPropertyChanged("Credit");
+            }
+        }
+
+        #endregion
+
+        #region Debit
+
+        private string debit;
+        public string Debit
+        {
+            get => debit;
+            set
+            {
+                debit = value;
+                OnPropertyChanged("Debit");
+            }
+        }
+
+        #endregion
+
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
