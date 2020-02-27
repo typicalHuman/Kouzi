@@ -10,9 +10,27 @@ using System.Xml.Serialization;
 namespace Kouzi.Scripts.Model
 {
     [Serializable]
-    public class Equipment : INotifyPropertyChanged, ICloneable
+    public class Equipment : INotifyPropertyChanged, ICloneable, IEquatable<Equipment>
     {
         #region Properties
+
+        #region Value
+
+        private int index = -1;
+        public int Index
+        {
+            get => index;
+            set
+            {
+                if (index != value)
+                {
+                    index = value;
+                    OnPropertyChanged("Index");
+                }
+            }
+        }
+
+        #endregion
 
         #region BuyerIndex
 
@@ -179,6 +197,15 @@ namespace Kouzi.Scripts.Model
         public override string ToString()
         {
             return Name;
+        }
+
+        #endregion
+
+        #region Equals
+
+        public bool Equals(Equipment equip)
+        {
+            return equip.Name == Name && equip.Cost == Cost && equip.MyCost == MyCost;
         }
 
         #endregion

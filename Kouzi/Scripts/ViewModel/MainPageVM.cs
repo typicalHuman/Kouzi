@@ -170,7 +170,7 @@ namespace Kouzi.Scripts.ViewModel
                             Equipment e = Buyers[i].EquipmentList[k];
                             if (e != null)
                             {
-                                if (equip.Cost == e.Cost && equip.MyCost == e.MyCost && equip.Name == e.Name)
+                                if (equip.Equals(e))
                                 {
                                     Buyers[i].EquipmentList.Remove(e);
                                     Buyers[i].EquipmentList.AddEquipment(new Equipment(), Buyers[i].Index);
@@ -195,8 +195,12 @@ namespace Kouzi.Scripts.ViewModel
                 {
                     Equipment equip = (Equipment)((FindCommandParameters)obj).Parameter1;
                     int equipmentIndex = (int)((FindCommandParameters)obj).Parameter2;
-                    if(equip != null)
-                       Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex] = (Equipment)equip.Clone();
+                    if(equipmentIndex != -1 && equip != null)
+                    {
+                        Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex] = (Equipment)equip.Clone();
+                        if (EquipmentsInfo.IndexOf(equip) != Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index)
+                            Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
+                    }
                 }));
             }
         }
@@ -275,8 +279,5 @@ namespace Kouzi.Scripts.ViewModel
         #endregion
 
         #endregion
-
-
-
     }
 }

@@ -88,6 +88,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Scripts\ViewModel\BuyersResultPageVM.cs" />
+    <Compile Include="Scripts\ViewModel\EquipmentsResultPageVM.cs" />
     <Compile Include="Scripts\View\BuyersResultPage.xaml.cs">
       <DependentUpon>BuyersResultPage.xaml</DependentUpon>
     </Compile>

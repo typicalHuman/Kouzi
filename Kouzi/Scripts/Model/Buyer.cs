@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Kouzi.Scripts.Model
 {
-    public class Buyer : INotifyPropertyChanged
+    public class Buyer : INotifyPropertyChanged, ICloneable
     {
 
         #region Command
@@ -135,13 +135,38 @@ namespace Kouzi.Scripts.Model
 
         #endregion
 
+        #region SelectedIndex
+
+        private int selectedIndex;
+        public int SelectedIndex
+        {
+            get => selectedIndex;
+            set
+            {
+                selectedIndex = value;
+                OnPropertyChanged("SelectedIndex");
+            }
+        }
+
+        #endregion
+
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+
         #endregion
+
+        #endregion
+
+        #region Clone
+
+        public object Clone()
+        {
+            return base.MemberwiseClone();
+        }
 
         #endregion
 

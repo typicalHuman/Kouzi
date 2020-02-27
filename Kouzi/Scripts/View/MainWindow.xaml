@@ -200,18 +200,37 @@
         <TextBlock Text="Коузи"  FontSize="25" FontWeight="Bold"
                    Margin="10 0" VerticalAlignment="Center" Grid.Column="1"/>
 
-        <!--#region AddBuyerButton -->
-        <Button Height="40" Width="150" Background="#32CD32" Content="{materialDesign:PackIcon Kind=Add,Size=30}"
-                    Foreground="White" HorizontalAlignment="Center" ToolTip="Добавить покупателя"
-                    Style="{StaticResource MaximizeButtonStyle}" Grid.ColumnSpan="5" Grid.Column="1"
-                DataContext="{x:Static local:App.MainPageVM}" Visibility="{Binding AddButtonVisibility}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:InvokeCommandAction Command="{Binding AddBuyerCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
+        <!--#region AddBuyerButtons -->
+        <StackPanel  HorizontalAlignment="Center"  Grid.ColumnSpan="5" Grid.Column="1" DataContext="{x:Static local:App.MainPageVM}" 
+                     Visibility="{Binding AddButtonVisibility, UpdateSourceTrigger=PropertyChanged}" Orientation="Horizontal">
+            <!--#region SimpleAdd -->
+            <Button Height="40" Width="150" Background="#32CD32" Content="{materialDesign:PackIcon Kind=Add,Size=30}"
+                    Foreground="White" ToolTip="Добавить покупателя"
+                    Style="{StaticResource MaximizeButtonStyle}"
+                >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding AddBuyerCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <!--#endregion-->
+            <!--#region ExtendedAdd -->
+            <Button Height="40" Width="150" Background="Green" Content="{materialDesign:PackIcon Kind=BriefcaseAdd,Size=30}"
+                    Foreground="White" ToolTip="Добавить покупателя с документами"
+                    Style="{StaticResource MaximizeButtonStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding AddBuyerCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <!--#endregion-->
+
+        </StackPanel>
+
         <!--#endregion-->
+        
       
 
         <!--#endregion-->

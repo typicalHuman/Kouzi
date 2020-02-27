@@ -86,7 +86,7 @@
                         </DockPanel>
                         <!--#endregion-->
                         <!--#region Equipment -->
-                        <ListView Foreground="White" 
+                        <ListView Foreground="White"
                                   Background="#1b1c1b"
                                   Name="EquipmentListView" Style="{StaticResource ListViewStyle}"
                                   ItemsSource="{Binding EquipmentList, UpdateSourceTrigger=PropertyChanged}">
@@ -120,45 +120,50 @@
                                     <GridViewColumn Header="Название"  Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <ComboBox ItemsSource="{Binding EquipmentsInfo, UpdateSourceTrigger=PropertyChanged}"  
+                                                <StackPanel>
+                                                    <TextBlock Visibility="Collapsed" Name="block" DataContext="{x:Static local:App.MainPageVM}"/>
+                                                    <ComboBox ItemsSource="{Binding ElementName=block, Path=DataContext.EquipmentsInfo, UpdateSourceTrigger=PropertyChanged}"  
                                                           Width="Auto" MinWidth="50" BorderBrush="White" 
-                                                          HorizontalAlignment="Center" Background="#1b1c1b"
-                                                          Name="EquipmentInfoBox" DataContext="{x:Static local:App.MainPageVM}">
-                                                    <ComboBox.ContextMenu>
-                                                        <ContextMenu Style="{StaticResource MaterialDesignMenu}"
+                                                          HorizontalAlignment="Center" Background="#1b1c1b"  
+                                                          Name="EquipmentInfoBox" 
+                                                            SelectedIndex="{Binding Index, UpdateSourceTrigger=PropertyChanged}">
+                                                        <ComboBox.ContextMenu>
+                                                            <ContextMenu Style="{StaticResource MaterialDesignMenu}"
                                                                      Background="#2b2c2b" Foreground="White"
                                                                      DataContext="{x:Static local:App.MainPageVM}">
-                                                            <MenuItem Header="Добавить информацию">
-                                                                <i:Interaction.Triggers>
-                                                                    <i:EventTrigger EventName="Click">
-                                                                        <i:InvokeCommandAction Command="{Binding AddEquipmentInfoCommand}"
+                                                                <MenuItem Header="Добавить информацию">
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="Click">
+                                                                            <i:InvokeCommandAction Command="{Binding AddEquipmentInfoCommand}"
                                                                                                CommandParameter="Scripts/View/AddingEquipmentPage.xaml"/>
-                                                                    </i:EventTrigger>
-                                                                </i:Interaction.Triggers>
-                                                            </MenuItem>
-                                                            <MenuItem Header="Удалить информацию">
-                                                                <i:Interaction.Triggers>
-                                                                    <i:EventTrigger EventName="Click">
-                                                                        <i:InvokeCommandAction Command="{Binding RemoveEquipmentInfoCommand}"
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
+                                                                </MenuItem>
+                                                                <MenuItem Header="Удалить информацию">
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="Click">
+                                                                            <i:InvokeCommandAction Command="{Binding RemoveEquipmentInfoCommand}"
                                                                                                CommandParameter="{Binding Path=PlacementTarget.SelectedValue, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContextMenu}}"/>
-                                                                    </i:EventTrigger>
-                                                                </i:Interaction.Triggers>
-                                                            </MenuItem>
-                                                        </ContextMenu>
-                                                    </ComboBox.ContextMenu>
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="SelectionChanged">
-                                                            <i:InvokeCommandAction Command="{Binding SelectEquipmentInfoCommand}">
-                                                                <i:InvokeCommandAction.CommandParameter>
-                                                                    <MultiBinding Converter="{StaticResource equipConverter}">
-                                                                        <Binding ElementName="EquipmentInfoBox" Path="SelectedValue"/>
-                                                                        <Binding ElementName="EquipmentListView" Path="SelectedIndex"/>
-                                                                    </MultiBinding>
-                                                                </i:InvokeCommandAction.CommandParameter>
-                                                            </i:InvokeCommandAction>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </ComboBox>
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
+                                                                </MenuItem>
+                                                            </ContextMenu>
+                                                        </ComboBox.ContextMenu>
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="SelectionChanged">
+                                                                <i:InvokeCommandAction Command="{Binding ElementName=block, Path=DataContext.SelectEquipmentInfoCommand}">
+                                                                    <i:InvokeCommandAction.CommandParameter>
+                                                                        <MultiBinding Converter="{StaticResource equipConverter}">
+                                                                            <Binding ElementName="EquipmentInfoBox" Path="SelectedValue"/>
+                                                                            <Binding ElementName="EquipmentListView" Path="SelectedIndex" UpdateSourceTrigger="PropertyChanged"/>
+                                                                        </MultiBinding>
+                                                                    </i:InvokeCommandAction.CommandParameter>
+                                                                </i:InvokeCommandAction>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                        
+                                                    </ComboBox>
+                                                </StackPanel>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

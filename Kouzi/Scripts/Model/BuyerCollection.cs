@@ -22,5 +22,21 @@ namespace Kouzi.Scripts.Model
             for (int i = index; i < Count; i++)
                 this[i].Index = $"{i + 1}.";
         }
+
+        public void ConcatSame()
+        {
+            for(int i = 0; i < Count; i++)
+            {
+                for(int k = 0; k < Count; k++)
+                {
+                    if(i != k && this[i].Name == this[k].Name)
+                    {
+                        this[i].EquipmentList.AddRange(this[k].EquipmentList);
+                        this.RemoveAt(k);
+                        k--;
+                    }
+                }
+            }
+        }
     }
 }

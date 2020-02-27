@@ -12,9 +12,9 @@ DEBUG;TRACE
 E:\Projects\Kouzi\Kouzi\App.xaml
 112028115052
 
-281905251239
+30-784633517
 127171823609
 Scripts\Controls\BackButton.xaml;Scripts\Styles\CloseButtonStyle.xaml;Scripts\Styles\DatePickerStyle.xaml;Scripts\Styles\ListViewStyle.xaml;Scripts\Styles\MaximizeButtonStyle.xaml;Scripts\View\AddingBuyerPage.xaml;Scripts\View\AddingEquipmentPage.xaml;Scripts\View\MainPage.xaml;Scripts\View\MainWindow.xaml;Scripts\View\BuyersResultPage.xaml;Scripts\View\EquipmentsResultPage.xaml;
 
-False
+True
 

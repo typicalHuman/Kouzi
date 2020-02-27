@@ -11,18 +11,7 @@ namespace Kouzi.Scripts.ViewModel
     public class MainVM : INotifyPropertyChanged
     {
 
-        #region Constructor
-
-        public MainVM()
-        {
-            WindowBorderThickness = new Thickness(1);
-        }
-
-        #endregion
-
         #region Commands
-
-
 
         #region Navigate
 
@@ -33,6 +22,10 @@ namespace Kouzi.Scripts.ViewModel
             {
                 return navigateCommand ?? (navigateCommand = new RelayCommand(obj =>
                 {
+                    if (!obj.ToString().Contains("Main"))
+                        App.MainPageVM.AddButtonVisibility = Visibility.Collapsed;
+                    else
+                        App.MainPageVM.AddButtonVisibility = Visibility.Visible;
                     new NavigateVM().Navigate(obj.ToString());
                 }));
             }
@@ -189,7 +182,7 @@ namespace Kouzi.Scripts.ViewModel
         #endregion
 
         #region WindowBorderThickness
-        private Thickness windowBorderThickness;
+        private Thickness windowBorderThickness = new Thickness(1);
         public Thickness WindowBorderThickness
         {
             get => windowBorderThickness;
@@ -209,6 +202,7 @@ namespace Kouzi.Scripts.ViewModel
         }
 
         #endregion
+
         #endregion
 
 

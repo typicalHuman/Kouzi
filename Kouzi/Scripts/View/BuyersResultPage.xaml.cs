@@ -22,7 +22,9 @@ namespace Kouzi.Scripts.View
     {
         public ResultBuyersPage()
         {
+            App.BuyersResultPageVM.SetBuyersList();
             InitializeComponent();
+
         }
     }
 }

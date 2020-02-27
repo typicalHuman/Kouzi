@@ -3,13 +3,105 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Kouzi.Scripts.View"
+      xmlns:local="clr-namespace:Kouzi"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ResultBuyersPage" Foreground="White" FontSize="20"
-      FontFamily="Courier New">
-
+      FontFamily="Courier New" DataContext="{x:Static local:App.BuyersResultPageVM}">
     <Grid>
-        <TextBlock Text="Buyer"/>
+        <ItemsControl DataContext="{x:Static local:App.BuyersResultPageVM}"
+                      ItemsSource="{Binding BuyersList, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding StringFormat=Имя: {0}, Path=Name}" 
+                           FontSize="25" Margin="5"/>
+                        <TreeView >
+                            <TreeViewItem Header="Оборудование:" FontSize="25" Foreground="White"
+                                          Name="TreeEquipment">
+                                <!--#region Equipment -->
+                                <ListView Foreground="White" 
+                                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                  Name="EquipmentListView" Style="{StaticResource ListViewStyle}"
+                                  ItemsSource="{Binding EquipmentList, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SizeChanged">
+                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.SizeChangedCommand}"
+                                                       CommandParameter="{Binding ElementName=TreeEquipment, Path=ActualWidth}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Название"  Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                          Width="Auto" MinWidth="50" 
+                                                          HorizontalAlignment="Center">
+                                                        </TextBlock>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Количество" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
+                                                         Width="Auto" HorizontalAlignment="Center">
+                                                        </TextBlock>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Стоимость" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" 
+                                                           VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Сумма" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                                                <GridViewColumn.CellTemplate >
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Стоимость(м)" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock  Text="{Binding MyCost, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Сумма(м)" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding MySum, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Разность" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Diff, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <!--#endregion-->
+                            </TreeViewItem>
+                        </TreeView>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            
+        </ItemsControl>
     </Grid>
 </Page>
