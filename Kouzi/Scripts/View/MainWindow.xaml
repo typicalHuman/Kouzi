@@ -264,6 +264,8 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
+
+            <Button Click="Button_Click"/>
             <!--#endregion-->
         </StackPanel>
 

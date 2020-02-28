@@ -16,6 +16,7 @@ using System.Windows.Markup;
 using System.Globalization;
 using GalaSoft.MvvmLight.Messaging;
 using Kouzi.Scripts.ViewModel;
+using Kouzi.Scripts.Other;
 
 namespace Kouzi
 {
@@ -50,7 +51,9 @@ namespace Kouzi
             });
         }
 
-
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new Excel("").Save();
+        }
     }
 }
