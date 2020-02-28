@@ -25,12 +25,6 @@
                                   HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                   Name="EquipmentListView" Style="{StaticResource ListViewStyle}"
                                   ItemsSource="{Binding EquipmentList, UpdateSourceTrigger=PropertyChanged}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SizeChanged">
-                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.SizeChangedCommand}"
-                                                       CommandParameter="{Binding ElementName=TreeEquipment, Path=ActualWidth}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn Header="Название"  Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">

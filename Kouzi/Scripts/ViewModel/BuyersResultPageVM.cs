@@ -14,11 +14,6 @@ namespace Kouzi.Scripts.ViewModel
     public class BuyersResultPageVM: INotifyPropertyChanged
     {
 
-
-        #region Commands
-
-        #endregion
-
         #region Properties
 
         #region BuyersList

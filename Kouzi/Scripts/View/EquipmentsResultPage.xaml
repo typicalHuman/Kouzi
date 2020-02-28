@@ -4,12 +4,105 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kouzi"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ResultPage" FontFamily="Courier New" FontSize="20"
-      Foreground="White">
+      Title="ResultPage" FontFamily="Courier New" FontSize="25"
+      Foreground="White" DataContext="{x:Static local:App.EquipmentsResultPageVM}">
 
     <Grid>
-        <TextBlock Text="Equip"/>
+
+        <!--#region Equipment-->
+        <ListView Foreground="White"  Margin="5" 
+                                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                  Name="EquipmentListView" Style="{StaticResource ListViewStyle}"
+                                  ItemsSource="{Binding EquipmentsList, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SizeChanged">
+                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.SizeChangedCommand}"
+                                                       CommandParameter="{Binding ElementName=EquipmentListView, Path=ActualWidth}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Название"  Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Margin="10 5 0 1">
+                                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                          Width="Auto" MinWidth="50" Margin="0 5"
+                                                          HorizontalAlignment="Center">
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Количество" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Margin="-12 5 0 1">
+                                    <TextBlock Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
+                                                         Width="Auto" HorizontalAlignment="Center" Margin="0 5">
+                                    </TextBlock>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Стоимость" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Margin="-12 5 0 1">
+                                    <TextBlock Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" 
+                                                           VerticalAlignment="Center" Margin="0 5"
+                                       HorizontalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Сумма" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Margin="-12 5 0 1">
+                                    <TextBlock Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" Margin="0 5"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Стоимость(м)" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Margin="-12 5 0 1">
+                                    <TextBlock  Text="{Binding MyCost, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" Margin="0 5"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Сумма(м)" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Margin="-12 5 0 1">
+                                    <TextBlock Text="{Binding MySum, UpdateSourceTrigger=PropertyChanged}"   VerticalAlignment="Center" 
+                                       HorizontalAlignment="Center" Margin="0 5"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Разность" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=DataContext.ColumnWidth}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Margin="-12 5 0 1">
+                                    <TextBlock Text="{Binding Diff, UpdateSourceTrigger=PropertyChanged}" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               Margin="0 5"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--#endregion-->
     </Grid>
 </Page>

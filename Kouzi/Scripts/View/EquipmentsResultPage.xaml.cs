@@ -22,6 +22,7 @@ namespace Kouzi.Scripts.View
     {
         public ResultPage()
         {
+            App.EquipmentsResultPageVM.SetEquipmentsList();
             InitializeComponent();
         }
     }

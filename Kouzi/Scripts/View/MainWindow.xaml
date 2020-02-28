@@ -190,15 +190,54 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                     Margin="5 0"/>
+                            <TextBlock Text="Сохранить" VerticalAlignment="Center" Margin="10 0"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Selected">
+                                <i:InvokeCommandAction/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSaveMove" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                     Margin="5 0"/>
+                            <TextBlock Text="Сохранить как" VerticalAlignment="Center" Margin="10 0"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Selected">
+                                <i:InvokeCommandAction/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FolderOpen" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                     Margin="5 0"/>
+                            <TextBlock Text="Открыть" VerticalAlignment="Center" Margin="10 0"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Selected">
+                                <i:InvokeCommandAction/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
                 </ListView>
                 <!--#endregion-->
             </StackPanel>
         </Grid>
         <!--#endregion-->
 
-        <!--#region Title -->
-        <TextBlock Text="Коузи"  FontSize="25" FontWeight="Bold"
-                   Margin="10 0" VerticalAlignment="Center" Grid.Column="1"/>
+
+
+            <!--#region Kouzi -->
+            <TextBlock Text="Коузи"  FontSize="25" FontWeight="Bold"
+                   Margin="10 0" VerticalAlignment="Center"/>
+            <!--#endregion-->
 
         <!--#region AddBuyerButtons -->
         <StackPanel  HorizontalAlignment="Center"  Grid.ColumnSpan="5" Grid.Column="1" DataContext="{x:Static local:App.MainPageVM}" 
@@ -226,12 +265,11 @@
                 </i:Interaction.Triggers>
             </Button>
             <!--#endregion-->
-
         </StackPanel>
 
-        <!--#endregion-->
-        
-      
+
+
+
 
         <!--#endregion-->
 

@@ -20,7 +20,7 @@ namespace Kouzi
         public static AddingEquipmentPageVM AddingEquipmentPageVM { get; set; }
         public static BackButtonVM BackButtonVM { get; set; }
         public static BuyersResultPageVM BuyersResultPageVM { get; set; }
-        public static BuyersResultPageVM EquipmentsResultPageVM { get; set; }
+        public static EquipmentsResultPageVM EquipmentsResultPageVM { get; set; }
 
         public App()
         {
@@ -30,6 +30,7 @@ namespace Kouzi
             AddingEquipmentPageVM = new AddingEquipmentPageVM();
             BackButtonVM = new BackButtonVM();
             BuyersResultPageVM = new BuyersResultPageVM();
+            EquipmentsResultPageVM = new EquipmentsResultPageVM();
         }
     }
 }
