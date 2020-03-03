@@ -192,37 +192,49 @@
                     </ListViewItem>
                     <ListViewItem Height="40">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ContentSave" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            <materialDesign:PackIcon Kind="FileDocumentBoxPlus" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                      Margin="5 0"/>
-                            <TextBlock Text="Сохранить" VerticalAlignment="Center" Margin="10 0"/>
+                            <TextBlock Text="Создать" VerticalAlignment="Center" Margin="10 0"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Selected">
+                            <i:EventTrigger EventName="PreviewMouseDown">
                                 <i:InvokeCommandAction/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
                     <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                     Margin="5 0"/>
+                            <TextBlock Text="Сохранить" VerticalAlignment="Center" Margin="10 0"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem Height="40" DataContext="{x:Static local:App.FileVM}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ContentSaveMove" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                      Margin="5 0"/>
                             <TextBlock Text="Сохранить как" VerticalAlignment="Center" Margin="10 0"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction/>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding SaveAsCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
-                    <ListViewItem Height="40">
-                        <StackPanel Orientation="Horizontal">
+                    <ListViewItem Height="40" DataContext="{x:Static local:App.FileVM}">
+                        <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="FolderOpen" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                      Margin="5 0"/>
                             <TextBlock Text="Открыть" VerticalAlignment="Center" Margin="10 0"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction/>
+                            <i:EventTrigger EventName="PreviewMouseDown">
+                                <i:InvokeCommandAction Command="{Binding OpenCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
@@ -234,7 +246,7 @@
 
 
 
-            <!--#region Kouzi -->
+        <!--#region Kouzi -->
             <TextBlock Text="Коузи"  FontSize="25" FontWeight="Bold"
                    Margin="10 0" VerticalAlignment="Center"/>
             <!--#endregion-->
@@ -264,8 +276,6 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-
-            <Button Click="Button_Click"/>
             <!--#endregion-->
         </StackPanel>
 

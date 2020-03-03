@@ -231,7 +231,16 @@ namespace Kouzi.Scripts.ViewModel
         #endregion
 
         #region Buyers
-        public BuyerCollection Buyers { get; set; } = new BuyerCollection();
+        private BuyerCollection buyers=  new BuyerCollection();
+        public BuyerCollection Buyers
+        {
+            get => buyers;
+            set
+            {
+                buyers = value;
+                OnPropertyChanged("Buyers");
+            }
+        }
         #endregion
 
         #region ColumnWidth

@@ -51,9 +51,5 @@ namespace Kouzi
             });
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new Excel("").Save();
-        }
     }
 }

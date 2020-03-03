@@ -21,6 +21,7 @@ namespace Kouzi
         public static BackButtonVM BackButtonVM { get; set; }
         public static BuyersResultPageVM BuyersResultPageVM { get; set; }
         public static EquipmentsResultPageVM EquipmentsResultPageVM { get; set; }
+        public static FileVM FileVM { get; set; }
 
         public App()
         {
@@ -31,6 +32,7 @@ namespace Kouzi
             BackButtonVM = new BackButtonVM();
             BuyersResultPageVM = new BuyersResultPageVM();
             EquipmentsResultPageVM = new EquipmentsResultPageVM();
+            FileVM = new FileVM();
         }
     }
 }

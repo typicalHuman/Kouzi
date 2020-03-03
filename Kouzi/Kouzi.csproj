@@ -44,6 +44,9 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="FastExcel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastExcel.3.0.6\lib\netstandard2.0\FastExcel.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -95,6 +98,7 @@
     <Compile Include="Scripts\Other\Excel.cs" />
     <Compile Include="Scripts\ViewModel\BuyersResultPageVM.cs" />
     <Compile Include="Scripts\ViewModel\EquipmentsResultPageVM.cs" />
+    <Compile Include="Scripts\ViewModel\FileVM.cs" />
     <Compile Include="Scripts\View\BuyersResultPage.xaml.cs">
       <DependentUpon>BuyersResultPage.xaml</DependentUpon>
     </Compile>

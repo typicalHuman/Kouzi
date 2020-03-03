@@ -158,7 +158,7 @@ namespace Kouzi.Scripts.Model
         #endregion
 
         #region Name
-        private string name;
+        private string name = "";
         [XmlElement]
         public string Name
         {

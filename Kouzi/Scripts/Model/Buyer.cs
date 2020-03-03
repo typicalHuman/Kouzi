@@ -86,7 +86,7 @@ namespace Kouzi.Scripts.Model
 
         #region Name
 
-        private string name;
+        private string name = "";
         public string Name
         {
             get => name;

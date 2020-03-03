@@ -13,7 +13,6 @@ namespace Kouzi.Scripts.ViewModel
 {
     public class EquipmentsResultPageVM: INotifyPropertyChanged
     {
-
         #region Commands
 
         #region SizeChangedCommand
@@ -35,7 +34,6 @@ namespace Kouzi.Scripts.ViewModel
         #endregion
 
         #endregion
-
 
         #region Properties
 
