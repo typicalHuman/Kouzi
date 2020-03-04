@@ -193,15 +193,20 @@ namespace Kouzi.Scripts.ViewModel
             {
                 return selectEquipmentInfoCommand ?? (selectEquipmentInfoCommand = new RelayCommand(obj => 
                 {
-                    Equipment equip = (Equipment)((FindCommandParameters)obj).Parameter1;
-                    int equipmentIndex = (int)((FindCommandParameters)obj).Parameter2;
-                    if(equipmentIndex != -1 && equip != null)
-                    {
-                        Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex] = (Equipment)equip.Clone();
-                        if (EquipmentsInfo.IndexOf(equip) != Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index)
-                            Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
-                    }
+                    SelectEquipmentInfo(((FindCommandParameters)obj).Parameter1, ((FindCommandParameters)obj).Parameter2);
                 }));
+            }
+        }
+
+        public void SelectEquipmentInfo(object Parameter1, object Parameter2)
+        {
+            Equipment equip = (Equipment)Parameter1;
+            int equipmentIndex = (int)Parameter2;
+            if (equipmentIndex != -1 && equip != null)
+            {
+                Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex] = (Equipment)equip.Clone();
+                if (EquipmentsInfo.IndexOf(equip) != Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index)
+                    Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
             }
         }
 
@@ -227,7 +232,16 @@ namespace Kouzi.Scripts.ViewModel
         #endregion
 
         #region EquipmentsInfo
-        public ObservableCollection<Equipment> EquipmentsInfo { get; set; } = new ObservableCollection<Equipment>();
+        private ObservableCollection<Equipment> equipmentsInfo = new ObservableCollection<Equipment>();
+        public ObservableCollection<Equipment> EquipmentsInfo
+        {
+            get => equipmentsInfo;
+            set
+            {
+                equipmentsInfo = value;
+                OnPropertyChanged("EquipmentsInfo");
+            }
+        }
         #endregion
 
         #region Buyers

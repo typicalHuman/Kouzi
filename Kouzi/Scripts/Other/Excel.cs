@@ -44,7 +44,7 @@ namespace Kouzi.Scripts.Other
                 Book.Close();
                 Marshal.ReleaseComObject(Sheet);
             }
-            catch(Exception ex)
+            catch(Exception)
             {  }
         }
 
@@ -54,6 +54,16 @@ namespace Kouzi.Scripts.Other
             Sheet = Book.Sheets[1];
             object[,] data = ReadData();
             SetBuyersData(ref data);
+            Book.Close();
+            Marshal.ReleaseComObject(Sheet);
+        }
+
+        public static void Save()
+        {
+            File.Delete(@"C:\Users\typical\Desktop\a.xlsx");
+            Book.SaveAs(@"C:\Users\typical\Desktop\a.xlsx", XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
+        false, false, XlSaveAsAccessMode.xlNoChange,
+        Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
             Book.Close();
             Marshal.ReleaseComObject(Sheet);
         }
@@ -218,18 +228,18 @@ namespace Kouzi.Scripts.Other
                     {
                         Date = (string)data[i, 2],
                         Name = (string)data[i, 3],
-                        Credit = (string)data[i, 11],
-                        Debit = (string)data[i + 1, 11]
+                        Credit = ((string)data[i, 11]).Replace("Кредит: ", ""),
+                        Debit = ((string)data[i + 1, 11]).Replace("Дебет: ", "")
                     };
                     Equipment equip = GetEquipment(data, i);
-                    b.EquipmentList.AddEquipment(equip, b.Index);
+                    b.EquipmentList.AddExcelEquipment(equip, b.Index);
                     App.MainPageVM.Buyers.Add(b);
                 }
                 for(int k = i; data[k, 1] == null && data[k, 4] != null ; k++)
                 {
                     Equipment equip = GetEquipment(data, k);
                     Buyer last = App.MainPageVM.Buyers[App.MainPageVM.Buyers.Count - 1];
-                    last.EquipmentList.AddEquipment(equip, last.Index);
+                    last.EquipmentList.AddExcelEquipment(equip, last.Index);
                 }
             }
         }
@@ -240,11 +250,15 @@ namespace Kouzi.Scripts.Other
             {
                 Equipment equip = new Equipment()
                 {
-                    Name = (string)data[row, 4],
-                    Count = (string)data[row, 5],
-                    Cost = (int)data[row, 6],
-                    MyCost = (int)data[row, 8]
+                    Name = data[row, 4].ToString(),
+                    Count = data[row, 5].ToString(),
+                    Cost = Convert.ToInt32(data[row, 6]),
+                    Sum = Convert.ToInt32(data[row, 7]),
+                    MyCost = Convert.ToInt32(data[row, 8]),
+                    MySum = Convert.ToInt32(data[row, 9]),
+                    Diff = Convert.ToInt32(data[row, 10])
                 };
+                return equip;
             }
             catch (Exception)
             { }

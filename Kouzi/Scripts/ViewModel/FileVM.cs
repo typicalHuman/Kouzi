@@ -8,6 +8,7 @@ namespace Kouzi.Scripts.ViewModel
 
         #region Commands
 
+        #region SaveAsCommand
         private RelayCommand saveAsCommand;
         public RelayCommand SaveAsCommand
         {
@@ -25,6 +26,24 @@ namespace Kouzi.Scripts.ViewModel
                 }));
             }
         }
+        #endregion
+
+        #region SaveCommand
+
+        private RelayCommand saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ?? (saveCommand = new RelayCommand(obj =>
+                {
+                    new Excel().Write();
+                    Excel.Save();
+                }));
+            }
+        }
+
+        #endregion
 
         #region OpenCommand
 

@@ -15,6 +15,26 @@ namespace Kouzi.Scripts.Model
             Add(equipment);
         }
 
+
+        public void AddExcelEquipment(Equipment equipment, string index)
+        {
+            for (int i = 0; i < App.MainPageVM.EquipmentsInfo.Count; i++)
+            {
+                if (App.MainPageVM.EquipmentsInfo[i].Equals(equipment))
+                    equipment.Index = i;
+                if (App.MainPageVM.EquipmentsInfo[i].Name == "")
+                    App.MainPageVM.EquipmentsInfo.RemoveAt(i);
+            }
+            if (equipment.Index == -1)
+            {
+                Equipment info = (Equipment)equipment.Clone();
+                info.Count = "";
+                App.MainPageVM.EquipmentsInfo.Add(info);
+                equipment.Index = App.MainPageVM.EquipmentsInfo.Count - 1;
+            }
+            AddEquipment(equipment, index);
+        }
+
         public new bool Contains(Equipment equip)
         {
             for (int i = 0; i < Count; i++)

@@ -10,14 +10,4 @@
     <Count>0</Count>
     <Name>а</Name>
   </Equipment>
-  <Equipment>
-    <Index>-1</Index>
-    <Diff>0</Diff>
-    <MySum>0</MySum>
-    <MyCost>4</MyCost>
-    <Sum>0</Sum>
-    <Cost>3</Cost>
-    <Count>0</Count>
-    <Name>б</Name>
-  </Equipment>
 </ArrayOfEquipment>
