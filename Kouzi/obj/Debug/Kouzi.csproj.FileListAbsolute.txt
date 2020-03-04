@@ -56,3 +56,5 @@ E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\BuyersResultPage.baml
 E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\EquipmentsResultPage.baml
 E:\Projects\Kouzi\Kouzi\bin\Debug\FastExcel.dll
 E:\Projects\Kouzi\Kouzi\bin\Debug\FastExcel.xml
+E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\Controls\SaveNotificationWindow.g.cs
+E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\Controls\SaveNotificationWindow.baml

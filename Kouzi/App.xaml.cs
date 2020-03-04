@@ -22,6 +22,7 @@ namespace Kouzi
         public static BuyersResultPageVM BuyersResultPageVM { get; set; }
         public static EquipmentsResultPageVM EquipmentsResultPageVM { get; set; }
         public static FileVM FileVM { get; set; }
+        public static SaveNotificationWindowVM SaveNotificationWindowVM { get; set; }
 
         public App()
         {
@@ -33,6 +34,7 @@ namespace Kouzi
             BuyersResultPageVM = new BuyersResultPageVM();
             EquipmentsResultPageVM = new EquipmentsResultPageVM();
             FileVM = new FileVM();
+            SaveNotificationWindowVM = new SaveNotificationWindowVM();
         }
     }
 }

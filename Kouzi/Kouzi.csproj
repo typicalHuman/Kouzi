@@ -95,10 +95,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Scripts\Controls\SaveNotificationWindow.xaml.cs">
+      <DependentUpon>SaveNotificationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scripts\Other\Excel.cs" />
+    <Compile Include="Scripts\Other\MainSheet.cs" />
+    <Compile Include="Scripts\Other\SheetBase.cs" />
     <Compile Include="Scripts\ViewModel\BuyersResultPageVM.cs" />
     <Compile Include="Scripts\ViewModel\EquipmentsResultPageVM.cs" />
     <Compile Include="Scripts\ViewModel\FileVM.cs" />
+    <Compile Include="Scripts\ViewModel\SaveNotificationWindowVM.cs" />
     <Compile Include="Scripts\View\BuyersResultPage.xaml.cs">
       <DependentUpon>BuyersResultPage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +112,10 @@
       <DependentUpon>EquipmentsResultPage.xaml</DependentUpon>
     </Compile>
     <Page Include="Scripts\Controls\BackButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Scripts\Controls\SaveNotificationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

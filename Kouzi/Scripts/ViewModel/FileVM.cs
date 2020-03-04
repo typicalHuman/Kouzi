@@ -6,6 +6,8 @@ namespace Kouzi.Scripts.ViewModel
     public class FileVM
     {
 
+        public static string filePath { get; set; } = "";
+
         #region Commands
 
         #region SaveAsCommand
@@ -20,8 +22,9 @@ namespace Kouzi.Scripts.ViewModel
                     saveFileDialog.Filter = "Excel File (*.xlsx)|*.xlsx";
                     if (saveFileDialog.ShowDialog() == true)
                     {
-                        new Excel().Write();
-                        Excel.SaveAs(saveFileDialog.FileName);
+                        Excel ex = new Excel();
+                        ex.Write();
+                        ex.SaveAs(saveFileDialog.FileName);
                     }
                 }));
             }
@@ -37,8 +40,12 @@ namespace Kouzi.Scripts.ViewModel
             {
                 return saveCommand ?? (saveCommand = new RelayCommand(obj =>
                 {
-                    new Excel().Write();
-                    Excel.Save();
+                    if (filePath != "")
+                    {
+                        Excel ex = new Excel();
+                        ex.Write();
+                        ex.Save();
+                    }
                 }));
             }
         }
@@ -63,6 +70,23 @@ namespace Kouzi.Scripts.ViewModel
                 }));
             }
         }
+        #endregion
+
+        #region CreateNew
+
+        private RelayCommand createNew;
+        public RelayCommand CreateNew
+        {
+            get
+            {
+                return createNew ?? (createNew = new RelayCommand(obj =>
+                {
+                    filePath = "";
+                    App.MainPageVM.Buyers = new Model.BuyerCollection();
+                }));
+            }
+        }
+
         #endregion
 
         #endregion

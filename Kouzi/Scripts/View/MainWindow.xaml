@@ -113,7 +113,7 @@
         <Grid Name="GridMenu" Width="51" HorizontalAlignment="Left" Background="#282828"
               Grid.Column="0" Grid.RowSpan="2" Grid.Row="0" Grid.ColumnSpan="3" Panel.ZIndex="3">
             <StackPanel>
-                <Grid Height="40" Background="White">
+                <Grid Height="40" Background="LightYellow">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -125,7 +125,7 @@
                     <!--#region MenuManipulationButtons -->
                     <Button Name="ButtonOpenMenu" Height="40" Width="51" HorizontalAlignment="Center" 
                             VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
-                            Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E"
+                            Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGreen"
                             Visibility="{Binding OpenMenuVisibility}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
@@ -137,7 +137,7 @@
                     <Button Height="40" Width="51" Name="ButtonCloseMenu"
                             HorizontalAlignment="Center" VerticalAlignment="Center" 
                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                            Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E"
+                            Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGreen"
                             Visibility="{Binding CloseMenuVisibility}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
@@ -149,7 +149,7 @@
                     <!--#endregion-->
                 </Grid>
                 <!--#region MenuItems -->
-                <ListView Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                <ListView Foreground="LightGreen" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           FontSize="16" SelectedIndex="{Binding SelectedIndex}">
                     <ListViewItem Height="40">
                         <StackPanel Orientation="Horizontal">
@@ -190,7 +190,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
-                    <ListViewItem Height="40">
+                    <ListViewItem Height="40" DataContext="{x:Static local:App.FileVM}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="FileDocumentBoxPlus" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                      Margin="5 0"/>
@@ -198,7 +198,7 @@
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseDown">
-                                <i:InvokeCommandAction/>
+                                <i:InvokeCommandAction Command="{Binding CreateNew}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
@@ -244,10 +244,8 @@
         </Grid>
         <!--#endregion-->
 
-
-
         <!--#region Kouzi -->
-            <TextBlock Text="Коузи"  FontSize="25" FontWeight="Bold"
+            <TextBlock Text="Коузи"  FontSize="25" FontWeight="Bold" Grid.Column="1"
                    Margin="10 0" VerticalAlignment="Center"/>
             <!--#endregion-->
 
