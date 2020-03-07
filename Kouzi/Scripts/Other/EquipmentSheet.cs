@@ -10,10 +10,6 @@ namespace Kouzi.Scripts.Other
 {
     public class EquipmentSheet : SheetBase
     {
-        public override object[,] GetData()
-        {
-            return base.GetData();
-        }
 
         public override void SetData(ref object[,] data)
         {
@@ -50,7 +46,7 @@ namespace Kouzi.Scripts.Other
             Sheet.Columns.AutoFit();
         }
 
-        public override void SetTitle(ref object[,] data)
+        public override void SetTitle(ref object[,] data, int index)
         {
             for(int i = 3; i < title.Length - 1; i++)
             {

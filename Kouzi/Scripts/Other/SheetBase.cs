@@ -38,6 +38,16 @@ namespace Kouzi.Scripts.Other
             range.Borders[XlBordersIndex.xlEdgeBottom].Color = ConsoleColor.Black;
         }
 
+
+        public void SetTopLine(int row)
+        {
+            if (row == 0)
+                row++;
+            Range range = Sheet.Range[Sheet.Cells[row, 1], Sheet.Cells[row, columns]];
+            range.Borders[XlBordersIndex.xlEdgeTop].Weight = XlBorderWeight.xlMedium;
+            range.Borders[XlBordersIndex.xlEdgeTop].Color = ConsoleColor.Black;
+        }
+
         public void SetVerticalLines(int row)
         {
             if (row == 0)
@@ -91,7 +101,7 @@ namespace Kouzi.Scripts.Other
 
         public abstract void SetData(ref object[,] data);
 
-        public abstract void SetTitle(ref object[,] data);
+        public abstract void SetTitle(ref object[,] data, int rowIndex=0);
 
         protected string[] title = {"1.Номер", "2.Дата", "3. Покупатель", "4.Оборудование", "5.Количество", "6.Стоимость", "7.Сумма", "8.Стоимость(м)", "9.Сумма(м)",
         "10.Разность", "11.Итог"};

@@ -14,7 +14,7 @@ namespace Kouzi.Scripts.Model
     {
         #region Properties
 
-        #region Value
+        #region ComboBoxIndex
 
         private int index = -1;
         public int Index
@@ -27,6 +27,22 @@ namespace Kouzi.Scripts.Model
                     index = value;
                     OnPropertyChanged("Index");
                 }
+            }
+        }
+
+        #endregion
+
+        #region Date
+
+        private string date;
+        [XmlElement]
+        public string Date
+        {
+            get => date;
+            set
+            {
+                date = value;
+                OnPropertyChanged("Date");
             }
         }
 

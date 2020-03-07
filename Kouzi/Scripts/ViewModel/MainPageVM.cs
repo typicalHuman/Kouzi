@@ -43,11 +43,11 @@ namespace Kouzi.Scripts.ViewModel
             b1.EquipmentList = new EquipmentCollection();
             Equipment e1 = new Equipment();
             Buyers.Add(b1);
-            b1.EquipmentList.AddEquipment(e1, b1.Index);
+            b1.EquipmentList.AddEquipment(e1, b1);
             Buyer b2 = new Buyer() { Name = "second" };
             b2.EquipmentList = new EquipmentCollection();
             Buyers.Add(b2);
-            b2.EquipmentList.AddEquipment(new Equipment(), b2.Index);
+            b2.EquipmentList.AddEquipment(new Equipment(), b2);
         }
         #endregion
 
@@ -173,7 +173,7 @@ namespace Kouzi.Scripts.ViewModel
                                 if (equip.Equals(e))
                                 {
                                     Buyers[i].EquipmentList.Remove(e);
-                                    Buyers[i].EquipmentList.AddEquipment(new Equipment(), Buyers[i].Index);
+                                    Buyers[i].EquipmentList.AddEquipment(new Equipment(), Buyers[i]);
                                 }
                             }
                         }

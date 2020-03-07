@@ -1,5 +1,6 @@
 ﻿using Kouzi.Scripts.Other;
 using Microsoft.Win32;
+using System.Windows;
 
 namespace Kouzi.Scripts.ViewModel
 {

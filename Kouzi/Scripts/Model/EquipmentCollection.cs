@@ -9,14 +9,15 @@ namespace Kouzi.Scripts.Model
 {
     public class EquipmentCollection: ObservableCollection<Equipment>
     {
-        public void AddEquipment(Equipment equipment, string index)
+        public void AddEquipment(Equipment equipment, Buyer b)
         {
-            equipment.BuyerIndex = index;
+            equipment.BuyerIndex = b.Index;
+            equipment.Date = b.Date;
             Add(equipment);
         }
 
 
-        public void AddExcelEquipment(Equipment equipment, string index)
+        public void AddExcelEquipment(Equipment equipment, Buyer b)
         {
             for (int i = 0; i < App.MainPageVM.EquipmentsInfo.Count; i++)
             {
@@ -32,7 +33,7 @@ namespace Kouzi.Scripts.Model
                 App.MainPageVM.EquipmentsInfo.Add(info);
                 equipment.Index = App.MainPageVM.EquipmentsInfo.Count - 1;
             }
-            AddEquipment(equipment, index);
+            AddEquipment(equipment, b);
         }
 
         public new bool Contains(Equipment equip)

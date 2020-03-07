@@ -26,6 +26,8 @@ namespace Kouzi.Scripts.Other
 
         private EquipmentSheet equipmentSheet { get; set; } = new EquipmentSheet();
 
+        private BuyerSheet buyerSheet { get; set; } = new BuyerSheet();
+
         #region Constructor
 
         public Excel()
@@ -34,6 +36,7 @@ namespace Kouzi.Scripts.Other
             Book.Worksheets.Add(Count: 2);
             mainSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(1);
             equipmentSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(2);
+            buyerSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(3);
         }
 
         #endregion
@@ -50,7 +53,7 @@ namespace Kouzi.Scripts.Other
                     FileVM.filePath = directoryPath;
                     Book.SaveAs(directoryPath);
                     Book.Close();
-                    Clear(mainSheet.Sheet, equipmentSheet.Sheet);
+                    Clear(mainSheet.Sheet, equipmentSheet.Sheet, buyerSheet.Sheet);
                     App.SaveNotificationWindowVM.IsSaved = true;
                 }
                 else
@@ -72,7 +75,7 @@ namespace Kouzi.Scripts.Other
             mainSheet.ReadData();
             FileVM.filePath = filePath;
             Book.Close();
-            Clear(mainSheet.Sheet, equipmentSheet.Sheet);
+            Clear(mainSheet.Sheet, equipmentSheet.Sheet, buyerSheet.Sheet);
         }
         #endregion
 
@@ -86,7 +89,7 @@ namespace Kouzi.Scripts.Other
             false, false, XlSaveAsAccessMode.xlExclusive,
             Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 Book.Close();
-                Clear(mainSheet.Sheet, equipmentSheet.Sheet);
+                Clear(mainSheet.Sheet, equipmentSheet.Sheet, buyerSheet.Sheet);
                 App.SaveNotificationWindowVM.IsSaved = true;
             }
         }
@@ -108,6 +111,7 @@ namespace Kouzi.Scripts.Other
             {
                 mainSheet.SetSheet();
                 equipmentSheet.SetSheet();
+                buyerSheet.SetSheet();
                 App.SaveNotificationWindowVM.IsSaved = true;
             });
         }

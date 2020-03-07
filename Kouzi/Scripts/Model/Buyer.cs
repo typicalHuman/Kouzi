@@ -165,7 +165,10 @@ namespace Kouzi.Scripts.Model
 
         public object Clone()
         {
-            return base.MemberwiseClone();
+            Buyer cloned = new Buyer() { Name = Name, Index = Index, Debit = Debit, Credit = Credit, Date = Date, SelectedIndex = SelectedIndex };
+            for (int i = 0; i < EquipmentList.Count; i++)
+                cloned.EquipmentList.Add((Equipment)EquipmentList[i].Clone());
+            return cloned;
         }
 
         #endregion

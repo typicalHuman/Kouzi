@@ -78,7 +78,7 @@ namespace Kouzi.Scripts.Other
             rows = cellI + 1;
         }
 
-        public override void SetTitle(ref object[,] data)
+        public override void SetTitle(ref object[,] data, int buyerIndex)
         {
             for (int i = 0; i < columns; i++)
                 data[0, i] = title[i];
@@ -89,7 +89,7 @@ namespace Kouzi.Scripts.Other
 
         public object[,] ReadData()
         {
-            object[,] data = null;
+            object[,] data;
             Range range = Sheet.UsedRange;
             data = (object[,])range.Value2;
             SetBuyersData(ref data);
@@ -111,14 +111,14 @@ namespace Kouzi.Scripts.Other
                         Debit = ((string)data[i + 1, 11]).Replace("Дебет: ", "")
                     };
                     Equipment equip = GetEquipment(data, i);
-                    b.EquipmentList.AddExcelEquipment(equip, b.Index);
+                    b.EquipmentList.AddExcelEquipment(equip, b);
                     App.MainPageVM.Buyers.Add(b);
                 }
                 for (int k = i; data[k, 1] == null && data[k, 4] != null; k++)
                 {
                     Equipment equip = GetEquipment(data, k);
                     Buyer last = App.MainPageVM.Buyers[App.MainPageVM.Buyers.Count - 1];
-                    last.EquipmentList.AddExcelEquipment(equip, last.Index);
+                    last.EquipmentList.AddExcelEquipment(equip, last);
                 }
             }
         }
