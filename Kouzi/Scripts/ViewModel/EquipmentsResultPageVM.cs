@@ -13,6 +13,11 @@ namespace Kouzi.Scripts.ViewModel
 {
     public class EquipmentsResultPageVM: INotifyPropertyChanged
     {
+        public EquipmentsResultPageVM()
+        {
+            SetEquipmentsList();
+        }
+
         #region Commands
 
         #region SizeChangedCommand
@@ -61,7 +66,7 @@ namespace Kouzi.Scripts.ViewModel
             {
                 for(int k = 0; k < App.MainPageVM.Buyers[i].EquipmentList.Count; k++)
                 {
-                    EquipmentsList.Add(App.MainPageVM.Buyers[i].EquipmentList[k]);
+                    EquipmentsList.Add((Equipment)App.MainPageVM.Buyers[i].EquipmentList[k].Clone());
                 }
             }
             EquipmentsList.ConcatSame();

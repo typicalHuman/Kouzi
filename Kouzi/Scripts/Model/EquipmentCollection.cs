@@ -65,5 +65,11 @@ namespace Kouzi.Scripts.Model
                 Add((Equipment)coll[i].Clone());
             ConcatSame();
         }
+
+        public void InsertEquipment(int index, Equipment equip, string buyerIndex)
+        {
+            equip.BuyerIndex = buyerIndex;
+            base.Insert(index, equip);
+        }
     }
 }

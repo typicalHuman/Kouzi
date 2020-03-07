@@ -16,6 +16,7 @@ namespace Kouzi
             var findCommandParameters = new FindCommandParameters();
             findCommandParameters.Parameter1 = Values[0];
             findCommandParameters.Parameter2 = Values[1];
+            findCommandParameters.Parameter3 = Values[2];
             return findCommandParameters;
         }
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)

@@ -14,10 +14,10 @@
     <Index>-1</Index>
     <Diff>0</Diff>
     <MySum>0</MySum>
-    <MyCost>0</MyCost>
+    <MyCost>1</MyCost>
     <Sum>0</Sum>
-    <Cost>0</Cost>
-    <Count />
-    <Name />
+    <Cost>22</Cost>
+    <Count>0</Count>
+    <Name>п</Name>
   </Equipment>
 </ArrayOfEquipment>

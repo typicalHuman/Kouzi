@@ -18,8 +18,10 @@
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="1" VerticalAlignment="Top" Style="{StaticResource CloseButtonStyle}"
-                Content="{materialDesign:PackIcon Kind=Close,Size=20}" ToolTip="Close">
+
+        <Button Grid.Column="1" VerticalAlignment="Top"  Style="{StaticResource CloseButtonStyle}"
+                Content="{materialDesign:PackIcon Kind=Close,Size=20}" ToolTip="Close"
+                IsEnabled="{Binding IsSaved, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <i:InvokeCommandAction Command="{Binding CloseCommand}"/>
@@ -27,7 +29,65 @@
             </i:Interaction.Triggers>
         </Button>
 
-        <TextBlock Text="Сохранено" Grid.ColumnSpan="2" HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
+        <TextBlock Text="Готово" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   IsEnabled="{Binding IsSaved, UpdateSourceTrigger=PropertyChanged}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}"
+                                     Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}"
+                                     Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+
+        <!--#region Loading -->
+
+            <StackPanel IsEnabled="{Binding IsSaved, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <materialDesign:PackIcon Kind="Loading" Width="50" Height="50" 
+                                         VerticalAlignment="Center"
+                                 HorizontalAlignment="Center" Foreground="LightGray"
+                                   >
+                <materialDesign:PackIcon.RenderTransform>
+                        <RotateTransform x:Name="rotate"
+                         CenterX="25"
+                         CenterY="25"/>
+                    </materialDesign:PackIcon.RenderTransform>
+                    <materialDesign:PackIcon.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetName="rotate"
+                                     Storyboard.TargetProperty="Angle"
+                                     By="360" Duration="0:0:1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </materialDesign:PackIcon.Triggers>
+                </materialDesign:PackIcon>
+                <TextBlock Text="Сохранение"/>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}" Value="True">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled}" Value="False">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>
+        <!--#endregion-->
     </Grid>
 </Window>

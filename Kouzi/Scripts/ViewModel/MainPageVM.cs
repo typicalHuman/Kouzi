@@ -193,20 +193,24 @@ namespace Kouzi.Scripts.ViewModel
             {
                 return selectEquipmentInfoCommand ?? (selectEquipmentInfoCommand = new RelayCommand(obj => 
                 {
-                    SelectEquipmentInfo(((FindCommandParameters)obj).Parameter1, ((FindCommandParameters)obj).Parameter2);
+                    SelectEquipmentInfo(((FindCommandParameters)obj).Parameter1, ((FindCommandParameters)obj).Parameter2,
+                        ((FindCommandParameters)obj).Parameter3);
                 }));
             }
         }
 
-        public void SelectEquipmentInfo(object Parameter1, object Parameter2)
+        public void SelectEquipmentInfo(object Parameter1, object Parameter2, object Parameter3)
         {
             Equipment equip = (Equipment)Parameter1;
             int equipmentIndex = (int)Parameter2;
+            int buyerIndex = (int)Parameter3;
             if (equipmentIndex != -1 && equip != null)
             {
-                Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex] = (Equipment)equip.Clone();
-                if (EquipmentsInfo.IndexOf(equip) != Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index)
-                    Buyers[SelectedBuyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
+                Buyers[buyerIndex].EquipmentList.RemoveAt(equipmentIndex);
+                Buyers[buyerIndex].EquipmentList.InsertEquipment(equipmentIndex,(Equipment)equip.Clone(), Buyers[buyerIndex].Index);
+                Buyers[buyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
+                if (EquipmentsInfo.IndexOf(equip) != Buyers[buyerIndex].EquipmentList[equipmentIndex].Index)
+                    Buyers[buyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
             }
         }
 
@@ -215,21 +219,6 @@ namespace Kouzi.Scripts.ViewModel
         #endregion
 
         #region Properties
-
-        #region SelectedBuyerIndex
-
-        private int selectedBuyerIndex;
-        public int SelectedBuyerIndex
-        {
-            get => selectedBuyerIndex;
-            set
-            {
-                selectedBuyerIndex = value;
-                OnPropertyChanged("SelectedBuyerIndex");
-            }
-        }
-
-        #endregion
 
         #region EquipmentsInfo
         private ObservableCollection<Equipment> equipmentsInfo = new ObservableCollection<Equipment>();

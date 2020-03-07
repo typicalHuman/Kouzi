@@ -20,7 +20,8 @@
         <!--#region Buyers -->
         <ListView Foreground="White" FontSize="20" ItemsSource="{Binding Buyers, UpdateSourceTrigger=PropertyChanged}"
                   FontFamily="Courier New" Margin="5" ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                  Name="List" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" SelectedIndex="{Binding SelectedBuyerIndex, UpdateSourceTrigger=PropertyChanged}">
+                  Name="List" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" 
+                  Style="{StaticResource ListViewStyle}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -156,6 +157,7 @@
                                                                         <MultiBinding Converter="{StaticResource equipConverter}">
                                                                             <Binding ElementName="EquipmentInfoBox" Path="SelectedValue"/>
                                                                             <Binding ElementName="EquipmentListView" Path="SelectedIndex" UpdateSourceTrigger="PropertyChanged"/>
+                                                                            <Binding ElementName="List" Path="SelectedIndex"/>
                                                                         </MultiBinding>
                                                                     </i:InvokeCommandAction.CommandParameter>
                                                                 </i:InvokeCommandAction>

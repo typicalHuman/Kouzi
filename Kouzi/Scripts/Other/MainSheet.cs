@@ -10,25 +10,15 @@ namespace Kouzi.Scripts.Other
 {
     public class MainSheet : SheetBase
     {
-        public override Worksheet Sheet { get; set; }
-
         public override void SetSheet()
         {
-            Range start = (Range)Sheet.Cells[1, 1];
-            Range end = (Range)Sheet.Cells[rows, columns];
-            Sheet.Range[start, end].Value2 = GetData();
-            SetAlignment(rows);
-            SetButtomLine(rows - 1);
-            SetVerticalLines(rows - 1);
-            Sheet.Columns.AutoFit();
+            Sheet.Name = "Общий лист";
+            base.SetSheet();
         }
 
         public override object[,] GetData()
         {
-            object[,] data = new object[rows, columns];
-            SetData(ref data);
-            SetTitle(ref data);
-            return data;
+            return base.GetData();
         }
 
         public override void SetData(ref object[,] data)

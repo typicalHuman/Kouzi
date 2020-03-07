@@ -98,6 +98,7 @@
     <Compile Include="Scripts\Controls\SaveNotificationWindow.xaml.cs">
       <DependentUpon>SaveNotificationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scripts\Other\EquipmentSheet.cs" />
     <Compile Include="Scripts\Other\Excel.cs" />
     <Compile Include="Scripts\Other\MainSheet.cs" />
     <Compile Include="Scripts\Other\SheetBase.cs" />

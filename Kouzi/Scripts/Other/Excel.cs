@@ -6,7 +6,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using Kouzi.Scripts.Controls;
 using Kouzi.Scripts.Model;
 using Kouzi.Scripts.ViewModel;
@@ -20,34 +22,49 @@ namespace Kouzi.Scripts.Other
 
         private static Workbook Book { get; set; }
 
-        public MainSheet mainSheet { get; set; } = new MainSheet();
+        private MainSheet mainSheet { get; set; } = new MainSheet();
+
+        private EquipmentSheet equipmentSheet { get; set; } = new EquipmentSheet();
 
         #region Constructor
 
         public Excel()
         {
             Book = ExcelApp.Workbooks.Add();
+            Book.Worksheets.Add(Count: 2);
             mainSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(1);
+            equipmentSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(2);
         }
 
         #endregion
 
         #region File Manipulation
+
+        #region SaveAs
         public void SaveAs(string directoryPath)
         {
             try
             {
-                FileVM.filePath = directoryPath;
-                Book.SaveAs(directoryPath);
-                Book.Close();
-                Marshal.ReleaseComObject(mainSheet.Sheet);
-                SaveNotificationWindow wind = new SaveNotificationWindow();
-                wind.ShowDialog();
+                if(!directoryPath.Contains(".xlsx"))
+                {
+                    FileVM.filePath = directoryPath;
+                    Book.SaveAs(directoryPath);
+                    Book.Close();
+                    Clear(mainSheet.Sheet, equipmentSheet.Sheet);
+                    App.SaveNotificationWindowVM.IsSaved = true;
+                }
+                else
+                {
+                    FileVM.filePath = directoryPath;
+                    Save();
+                }
             }
-            catch(Exception)
-            {  }
+            catch (Exception)
+            { }
         }
+        #endregion
 
+        #region Open
         public void Open(string filePath)
         {
             Book = ExcelApp.Workbooks.Open(filePath);
@@ -55,99 +72,70 @@ namespace Kouzi.Scripts.Other
             mainSheet.ReadData();
             FileVM.filePath = filePath;
             Book.Close();
-            Marshal.ReleaseComObject(mainSheet.Sheet);
+            Clear(mainSheet.Sheet, equipmentSheet.Sheet);
         }
+        #endregion
 
+        #region Save
         public void Save()
         {
-            if(FileVM.filePath != "")
+            if (FileVM.filePath != "")
             {
                 File.Delete(FileVM.filePath);
                 Book.SaveAs(FileVM.filePath, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
-            false, false, XlSaveAsAccessMode.xlNoChange,
+            false, false, XlSaveAsAccessMode.xlExclusive,
             Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 Book.Close();
-                Marshal.ReleaseComObject(mainSheet.Sheet);
+                Clear(mainSheet.Sheet, equipmentSheet.Sheet);
+                App.SaveNotificationWindowVM.IsSaved = true;
             }
         }
         #endregion
 
-        #region WriteData
+        #endregion
 
         #region Write
 
         public void Write()
         {
-            mainSheet.SetSheet();
+            Set();
+            ShowNotificationDialog();
         }
 
-
-        #region SetmainSheet
-
-        private void SetmainSheet()
+        private async void Set()
         {
-            
-        }
-
-        #endregion
-
-        #endregion
-
-        #region SetData
-
-
-        #region SetEquipmentResultData
-
-        private void SetEquipmentResultData(ref object[,] data)
-        {
-            //data = new object[App.EquipmentsResultPageVM.EquipmentsList.Count + 1, equipmentColumns];
-            for (int i = 1; i < data.GetLength(1); i++)
+            await Task.Run(() =>
             {
-                Equipment equip = App.EquipmentsResultPageVM.EquipmentsList[i - 1];
-                data[i, 0] = equip.Name;
-                data[i, 1] = equip.Count;
-                data[i, 2] = equip.Cost;
-                data[i, 3] = equip.Sum;
-                data[i, 4] = equip.MyCost;
-                data[i, 5] = equip.MySum;
-                data[i, 6] = equip.Diff;
-            }
+                mainSheet.SetSheet();
+                equipmentSheet.SetSheet();
+                App.SaveNotificationWindowVM.IsSaved = true;
+            });
         }
 
         #endregion
 
-        #endregion
+        #region Clear
 
-
-
-
-        #region SetTitle
-
-        string[] title = {"1.Номер", "2.Дата", "3. Покупатель", "4.Оборудование", "5.Количество", "6.Стоимость", "7.Сумма", "8.Стоимость(м)", "9.Сумма(м)",
-        "10.Разность", "11.Итог"};
-
-        public void SetTitle(ref object [,] data)
+        private void Clear(params object[] values)
         {
-            
+            for (int i = 0; i < values.Length; i++)
+                Marshal.ReleaseComObject(values[i]);
         }
 
         #endregion
 
-        #region GetData
+        #region SaveNotification
 
 
 
-        private object[,] GetEquipmentData()
+        public void ShowNotificationDialog()
         {
-            object[,] data = null;
-            SetEquipmentResultData(ref data);
-            return data;
+            SaveNotificationWindow wind = new SaveNotificationWindow();
+            wind.ShowDialog();
         }
-
         #endregion
 
-        #endregion
 
-        
     }
 }
+
