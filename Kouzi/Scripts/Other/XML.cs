@@ -17,6 +17,7 @@ namespace Kouzi.Scripts.Other
             {
                 serializer.Serialize(fs, coll);
             }
+            File.SetAttributes(fileName, FileAttributes.Hidden);
         }
 
         private void ClearFileContent(string fileName)

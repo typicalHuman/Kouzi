@@ -33,7 +33,6 @@ E:\Projects\Kouzi\Kouzi\obj\Debug\Kouzi.csproj.GenerateResource.cache
 E:\Projects\Kouzi\Kouzi\obj\Debug\Kouzi.csproj.CopyComplete
 E:\Projects\Kouzi\Kouzi\obj\Debug\Kouzi.exe
 E:\Projects\Kouzi\Kouzi\obj\Debug\Kouzi.pdb
-E:\Projects\Kouzi\Kouzi\obj\Debug\Kouzi.csprojAssemblyReference.cache
 E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\Styles\ListViewStyle.baml
 E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\Styles\DatePickerStyle.baml
 E:\Projects\Kouzi\Kouzi\obj\Debug\Scripts\View\AddingBuyerPage.g.cs

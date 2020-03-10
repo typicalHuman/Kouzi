@@ -30,6 +30,7 @@ namespace Kouzi.Scripts.ViewModel
         public MainPageVM()
         {
             //initalizing from xml documents
+            string startupPath = System.IO.Directory.GetCurrentDirectory();
             BuyersNames = (ObservableCollection<string>)new XML<string>().Deserialize("BuyersNamesData.xml") ?? 
                 new ObservableCollection<string>();
             EquipmentsInfo = (ObservableCollection<Equipment>)new XML<Equipment>().Deserialize("EquipmentsInfoData.xml") ??
