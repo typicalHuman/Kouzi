@@ -62,7 +62,7 @@
 
                             <!--#region Date -->
                             <DatePicker SelectedDateFormat="Short" Margin="20 0"  FontSize="20"
-                                    BorderBrush="LightGray"
+                                    BorderBrush="LightGray" 
                                     Foreground="LightGray"
                                     Background="Transparent"
                                     VerticalAlignment="Center"

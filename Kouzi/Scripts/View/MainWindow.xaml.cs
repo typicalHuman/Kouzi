@@ -32,10 +32,6 @@ namespace Kouzi
             App.MainVM.CloseAction = this.Close;
             NavigationSetup();
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-
-
-            App.MainPageVM.TestBuyers();
-
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

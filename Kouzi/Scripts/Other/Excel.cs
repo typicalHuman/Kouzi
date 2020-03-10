@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,11 +18,11 @@ using Microsoft.Office.Interop.Excel;
 
 namespace Kouzi.Scripts.Other
 {
-    public class Excel
+    public class Excel: IDisposable
     {
         private Application ExcelApp { get; set; } = new Application();
 
-        private static Workbook Book { get; set; }
+        private Workbook Book { get; set; }
 
         private MainSheet mainSheet { get; set; } = new MainSheet();
 
@@ -28,15 +30,43 @@ namespace Kouzi.Scripts.Other
 
         private BuyerSheet buyerSheet { get; set; } = new BuyerSheet();
 
+        private DateSheet dateSheet { get; set; } = new DateSheet();
+
+        #region Destructor
+
+
+        ~Excel()
+        {
+            this.Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private GCHandle rcwHandle;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.rcwHandle.IsAllocated)
+            {
+                this.rcwHandle.Free();
+            }
+        }
+        #endregion
+
         #region Constructor
 
         public Excel()
         {
             Book = ExcelApp.Workbooks.Add();
-            Book.Worksheets.Add(Count: 2);
+            Book.Worksheets.Add(Count: 3);
             mainSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(1);
             equipmentSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(2);
             buyerSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(3);
+            dateSheet.Sheet = (Worksheet)Book.Worksheets.get_Item(4);
         }
 
         #endregion
@@ -52,8 +82,10 @@ namespace Kouzi.Scripts.Other
                 {
                     FileVM.filePath = directoryPath;
                     Book.SaveAs(directoryPath);
-                    Book.Close();
-                    Clear(mainSheet.Sheet, equipmentSheet.Sheet, buyerSheet.Sheet);
+                    Book.Close(false, false, false);
+                    ExcelApp.Quit();
+                    Clear();
+                    GC.Collect();
                     App.SaveNotificationWindowVM.IsSaved = true;
                 }
                 else
@@ -74,8 +106,11 @@ namespace Kouzi.Scripts.Other
             mainSheet.Sheet = Book.Sheets[1];
             mainSheet.ReadData();
             FileVM.filePath = filePath;
-            Book.Close();
-            Clear(mainSheet.Sheet, equipmentSheet.Sheet, buyerSheet.Sheet);
+            Book.Close(true);
+            ExcelApp.Quit();
+            Clear();
+            GC.Collect();
+            //добавить окно, которое спрашивало бы "имеются несохраненные данные, сохранить?"
         }
         #endregion
 
@@ -88,42 +123,48 @@ namespace Kouzi.Scripts.Other
                 Book.SaveAs(FileVM.filePath, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
             false, false, XlSaveAsAccessMode.xlExclusive,
             Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-                Book.Close();
-                Clear(mainSheet.Sheet, equipmentSheet.Sheet, buyerSheet.Sheet);
+                Book.Close(true);
+                ExcelApp.Quit();
+                Clear();
+                GC.Collect();
                 App.SaveNotificationWindowVM.IsSaved = true;
             }
         }
         #endregion
 
         #endregion
-
         #region Write
 
         public void Write()
         {
             Set();
-            ShowNotificationDialog();
         }
 
-        private async void Set()
+        private void Set()
         {
-            await Task.Run(() =>
-            {
-                mainSheet.SetSheet();
-                equipmentSheet.SetSheet();
-                buyerSheet.SetSheet();
-                App.SaveNotificationWindowVM.IsSaved = true;
-            });
+            dateSheet.SetSheet();
+            mainSheet.SetSheet();
+            equipmentSheet.SetSheet();
+            buyerSheet.SetSheet();
+            App.SaveNotificationWindowVM.IsSaved = true;
         }
 
         #endregion
 
         #region Clear
 
-        private void Clear(params object[] values)
+        private void Clear()
         {
-            for (int i = 0; i < values.Length; i++)
-                Marshal.ReleaseComObject(values[i]);
+            Process[] AllProcesses = Process.GetProcessesByName("excel");
+
+            // check to kill the right process
+            foreach (Process ExcelProcess in AllProcesses)
+            {
+                if (new Hashtable().ContainsKey(ExcelProcess.Id) == false)
+                    ExcelProcess.Kill();
+            }
+
+            AllProcesses = null;
         }
 
         #endregion
@@ -135,7 +176,7 @@ namespace Kouzi.Scripts.Other
         public void ShowNotificationDialog()
         {
             SaveNotificationWindow wind = new SaveNotificationWindow();
-            wind.ShowDialog();
+            wind.Show();
         }
         #endregion
 

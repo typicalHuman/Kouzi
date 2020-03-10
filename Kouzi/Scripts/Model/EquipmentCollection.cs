@@ -67,9 +67,10 @@ namespace Kouzi.Scripts.Model
             ConcatSame();
         }
 
-        public void InsertEquipment(int index, Equipment equip, string buyerIndex)
+        public void InsertEquipment(int index, Equipment equip, Buyer b)
         {
-            equip.BuyerIndex = buyerIndex;
+            equip.BuyerIndex = b.Index;
+            equip.Date = b.Date;
             base.Insert(index, equip);
         }
     }

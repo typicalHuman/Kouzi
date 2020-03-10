@@ -36,19 +36,6 @@ namespace Kouzi.Scripts.ViewModel
                 new ObservableCollection<Equipment>();
         }
 
-        public void TestBuyers()
-        {
-            Buyer b1 = new Buyer();
-            b1.Name = "first";
-            b1.EquipmentList = new EquipmentCollection();
-            Equipment e1 = new Equipment();
-            Buyers.Add(b1);
-            b1.EquipmentList.AddEquipment(e1, b1);
-            Buyer b2 = new Buyer() { Name = "second" };
-            b2.EquipmentList = new EquipmentCollection();
-            Buyers.Add(b2);
-            b2.EquipmentList.AddEquipment(new Equipment(), b2);
-        }
         #endregion
 
         #region Commands
@@ -207,7 +194,7 @@ namespace Kouzi.Scripts.ViewModel
             if (equipmentIndex != -1 && equip != null)
             {
                 Buyers[buyerIndex].EquipmentList.RemoveAt(equipmentIndex);
-                Buyers[buyerIndex].EquipmentList.InsertEquipment(equipmentIndex,(Equipment)equip.Clone(), Buyers[buyerIndex].Index);
+                Buyers[buyerIndex].EquipmentList.InsertEquipment(equipmentIndex,(Equipment)equip.Clone(), Buyers[buyerIndex]);
                 Buyers[buyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
                 if (EquipmentsInfo.IndexOf(equip) != Buyers[buyerIndex].EquipmentList[equipmentIndex].Index)
                     Buyers[buyerIndex].EquipmentList[equipmentIndex].Index = EquipmentsInfo.IndexOf(equip);
@@ -241,6 +228,7 @@ namespace Kouzi.Scripts.ViewModel
             set
             {
                 buyers = value;
+                FileVM.isChanged = true;
                 OnPropertyChanged("Buyers");
             }
         }

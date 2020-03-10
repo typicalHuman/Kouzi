@@ -80,14 +80,18 @@ namespace Kouzi.Scripts.Other
 
         public override void SetSheet()
         {
-            Sheet.Name = "Покупатели";
-            Range start = (Range)Sheet.Cells[1, 1];
-            Range end = (Range)Sheet.Cells[rows, columns];
-            Sheet.Range[start, end].Value2 = GetData();
-            SetAlignment(rows + 1);
-            SetButtomLine(rows);
-            SetVerticalLines(rows, columns + 1);
-            Sheet.Columns.AutoFit();
+            try
+            {
+                Sheet.Name = "Покупатели";
+                Range start = (Range)Sheet.Cells[1, 1];
+                Range end = (Range)Sheet.Cells[rows, columns];
+                Sheet.Range[start, end].Value2 = GetData();
+                SetAlignment(rows + 1);
+                SetButtomLine(rows);
+                SetVerticalLines(rows, columns + 1);
+                Sheet.Columns.AutoFit();
+            }
+            catch (Exception) { }
         }
     }
 }

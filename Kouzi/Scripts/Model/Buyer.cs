@@ -42,7 +42,7 @@ namespace Kouzi.Scripts.Model
             {
                 return addEquipmentCommand ?? (addEquipmentCommand = new RelayCommand(obj =>
                 {
-                    EquipmentList.Add(new Equipment());
+                    EquipmentList.AddEquipment(new Equipment(), this);
                 }));
             }
         }
@@ -71,6 +71,14 @@ namespace Kouzi.Scripts.Model
 
         #region Date
 
+        private void UpdateEquipmentsDate(string date)
+        {
+            for(int i = 0; i < EquipmentList.Count; i++)
+            {
+                EquipmentList[i].Date = date;
+            }
+        }
+
         private string date;
         public string Date
         {
@@ -78,6 +86,7 @@ namespace Kouzi.Scripts.Model
             set
             {
                 date = value;
+                UpdateEquipmentsDate(date);
                 OnPropertyChanged("Date");
             }
         }

@@ -16,6 +16,7 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Local"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>

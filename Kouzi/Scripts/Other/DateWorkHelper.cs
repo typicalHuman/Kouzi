@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kouzi.Scripts.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,43 +9,77 @@ namespace Kouzi.Scripts.Other
 {
     class DateWorkHelper
     {
-        private delegate int Comparer (string date);
-
-        public static int Compare(string date1, string date2)
+        public static List<DateTime>[] GetDatesByMonths()
         {
-            Comparer comparer = GetYear;
-            int result = ComparerPattern(comparer, date1, date2);
-            if (result != 0) 
-                return result;
-            comparer = GetMonth;
-            result = ComparerPattern(comparer, date1, date2);
-            if (result != 0)
-                return result;
-            comparer = GetDay;
-            result = ComparerPattern(comparer, date1, date2);
-            if (result != 0)
-                return result;
-            return 0;
+            List<DateTime>[] dates = new List<DateTime>[12];
+            App.EquipmentsResultPageVM.SetEquipmentsList();
+            for (int j = 0; j < App.MainPageVM.Buyers.Count; j++)
+            {
+                for (int i = 0; i < App.MainPageVM.Buyers[j].EquipmentList.Count; i++)
+                {
+                    DateTime date;
+                    Equipment equip = App.MainPageVM.Buyers[j].EquipmentList[i];
+                    if (DateTime.TryParse(equip.Date, out date))
+                    {
+                        date = DateTime.Parse(equip.Date);
+                        if (dates[date.Month - 1] == null)
+                            dates[date.Month - 1] = new List<DateTime>();
+                        dates[date.Month - 1].Add(date);
+                    }
+                }
+            }
+            RemoveSame(ref dates);
+            Sort(ref dates);
+            return dates;
         }
 
-        private static int ComparerPattern(Comparer comparer, string date1, string date2)
+        public static int GetMaxDaysInMonths(List<DateTime>[] dates)
         {
-                return comparer(date1).CompareTo(comparer(date2));
+            int max = 0;
+            int k;
+            for(int i = 0; i < dates.Length; i++)
+            {
+                for(k = 0; dates[i] != null && k < dates[i].Count; k++)
+                {
+                }
+                if (k > max)
+                    max = k;
+            }
+            return max;
         }
 
-        private static int GetDay(string date)
+        private static void RemoveSame(ref List<DateTime>[] dates)
         {
-            return int.Parse(date.Split('.')[0]);
+            for(int i = 0; i < 12; i++)
+            {
+                for(int k = 0; dates[i] != null && k < dates[i].Count; k++)
+                {
+                    for(int j = 0; j < dates[i].Count; j++)
+                    {
+                        if (k != j && dates[i][k] == dates[i][j])
+                            dates[i].RemoveAt(j);
+                    }
+                }
+            }
         }
 
-        private static int GetMonth(string date)
+        private static void Sort(ref List<DateTime>[] dates)
         {
-            return int.Parse(date.Split('.')[1]);
-        }
-
-        private static int GetYear(string date)
-        {
-            return int.Parse(date.Split('.')[2]);
+            for(int i = 0; i < 12; i++)
+            {
+                for (int k = 0; dates[i] != null && k < dates[i].Count; k++)
+                {
+                    for (int j = 0; j < dates[i].Count - 1 - k; j++)
+                    {
+                        if (dates[i][j].Day > dates[i][j + 1].Day)
+                        {
+                            DateTime temp = dates[i][j + 1];
+                            dates[i][j + 1] = dates[i][j];
+                            dates[i][j] = temp;
+                        }
+                    }
+                }
+            }
         }
     }
 }
