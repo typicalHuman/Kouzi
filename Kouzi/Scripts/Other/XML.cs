@@ -17,11 +17,13 @@ namespace Kouzi.Scripts.Other
             {
                 serializer.Serialize(fs, coll);
             }
-            File.SetAttributes(fileName, FileAttributes.Hidden);
+            File.SetAttributes(fileName, FileAttributes.Normal);
         }
 
         private void ClearFileContent(string fileName)
         {
+            File.SetAttributes(fileName, FileAttributes.Normal);
+            File.Delete(fileName);
             StreamWriter sr = new StreamWriter(fileName, false);
             sr.WriteLine("");
             sr.Close();

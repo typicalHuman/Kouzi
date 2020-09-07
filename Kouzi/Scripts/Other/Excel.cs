@@ -133,6 +133,7 @@ namespace Kouzi.Scripts.Other
         #endregion
 
         #endregion
+
         #region Write
 
         public void Write()

@@ -183,40 +183,22 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Margin" Value="5 0"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <!--<Setter Property="Margin" Value="5 0"/>-->
+        <!--<Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment"
           Value="Right" />
         <Setter Property="VerticalContentAlignment"
-          Value="Center" />
-        <Setter Property="Background" Value="Transparent"/>
-        <Style.Triggers>
-            <Trigger Property="Role"
-             Value="Floating">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="GridViewColumnHeader">
-                            <StackPanel Orientation="Horizontal">
-                                <Canvas Name="PART_FloatingHeaderCanvas">
-                                    <Rectangle Fill="#1b1c1b"
-                         Width="Auto"
-                         Height="{TemplateBinding ActualHeight}" />
-                                </Canvas>
-                                <GridViewRowPresenter Width="100" />
-                            </StackPanel>
-
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-            <Trigger Property="Role"
-             Value="Padding">
-                <Setter Property="BorderBrush" Value="Transparent"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="White"/>
-            </Trigger>
-        </Style.Triggers> 
+          Value="Center" />-->
+        <!--<Setter Property="Background" Value="Transparent"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                    <Border BorderThickness="0,0,0,0" BorderBrush="Transparent" Background="Transparent">
+                        <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="ListViewStyle"

@@ -67,7 +67,7 @@ namespace Kouzi.Scripts.Other
                     if (equip.Name == name)
                     {
                         DateTime date = GetDateFromString(equip.Date);
-                        if(date != default && date.Day == day && date.Month == monthIndex + 1)
+                        if(date != default(DateTime) && date.Day == day && date.Month == monthIndex + 1)
                         {
                             count += int.Parse(equip.Count);
                         }
@@ -82,7 +82,7 @@ namespace Kouzi.Scripts.Other
             DateTime result;
             if (DateTime.TryParse(date, out result))
                 return result;
-            return default;
+            return default(DateTime);
         }
 
         private void SetDays(ref object[,] data, ref int row, int monthIndex)

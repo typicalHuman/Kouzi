@@ -223,14 +223,19 @@
                         </ListView>
                         <!--#endregion-->
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBox   PreviewTextInput="NumberTextBox"
+                        <StackPanel  Orientation="Vertical" HorizontalAlignment="Right" >
+                            <TextBlock Text="{Binding Benefit, UpdateSourceTrigger=PropertyChanged}" Foreground="#32CD32"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox   PreviewTextInput="NumberTextBox"
                                   BorderBrush="White" Width="Auto" materialDesign:HintAssist.Hint="Кредит"
                                        Text="{Binding Credit, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBox PreviewTextInput="NumberTextBox" Margin="10 0"
+                                <TextBox PreviewTextInput="NumberTextBox" Margin="10 0"
                                   BorderBrush="White" Width="Auto" materialDesign:HintAssist.Hint="Дебет"
                                      Text="{Binding Debit, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
                         </StackPanel>
+                        
+                     
                         <Separator Margin="0 15"/>
                     </StackPanel>
                 </DataTemplate>

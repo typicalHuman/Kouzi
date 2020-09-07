@@ -12,6 +12,8 @@ namespace Kouzi.Scripts.Model
     [Serializable]
     public class Equipment : INotifyPropertyChanged, ICloneable, IEquatable<Equipment>
     {
+     
+
         #region Properties
 
         #region ComboBoxIndex
@@ -155,6 +157,12 @@ namespace Kouzi.Scripts.Model
                 Sum = _count * Cost;
                 MySum = _count * MyCost;
                 Diff = Sum - MySum;
+                if (App.MainPageVM != null && BuyerIndex != null)
+                {
+                    int _buyerIndex = int.Parse(BuyerIndex.Replace(".", "")) - 1;
+                    if(_buyerIndex != -1)
+                       App.MainPageVM.Buyers[_buyerIndex].UpdateBenefit();//just to upd
+                }
             }
         }
 

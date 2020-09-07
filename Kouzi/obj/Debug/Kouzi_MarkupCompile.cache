@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-E:\Projects\Kouzi\Kouzi\obj\Debug\
+C:\Users\HP\Desktop\Kouzi\Kouzi\obj\Debug\
 Kouzi
 none
 false
 DEBUG;TRACE
-E:\Projects\Kouzi\Kouzi\App.xaml
+C:\Users\HP\Desktop\Kouzi\Kouzi\App.xaml
 12435486068
 
 39705430609
-129-690013124
+127834137253
 Scripts\Controls\BackButton.xaml;Scripts\Controls\SaveNotificationWindow.xaml;Scripts\Styles\CloseButtonStyle.xaml;Scripts\Styles\DatePickerStyle.xaml;Scripts\Styles\ListViewStyle.xaml;Scripts\Styles\MaximizeButtonStyle.xaml;Scripts\View\AddingBuyerPage.xaml;Scripts\View\AddingEquipmentPage.xaml;Scripts\View\MainPage.xaml;Scripts\View\MainWindow.xaml;Scripts\View\BuyersResultPage.xaml;Scripts\View\EquipmentsResultPage.xaml;
 
 False

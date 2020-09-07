@@ -13,6 +13,22 @@ namespace Kouzi.Scripts.Model
 {
     public class Buyer : INotifyPropertyChanged, ICloneable
     {
+        #region Methods
+
+        private int GetBenefit()
+        {
+            int amount = 0;
+            foreach (Equipment eq in EquipmentList)
+                amount += eq.Diff;
+            return amount;
+        }
+
+        public void UpdateBenefit()
+        {
+            Benefit = 0;
+        }
+
+        #endregion
 
         #region Command
 
@@ -26,6 +42,7 @@ namespace Kouzi.Scripts.Model
                 return removeEquipmentCommand ?? (removeEquipmentCommand = new RelayCommand(obj =>
                 {
                     EquipmentList.Remove((Equipment)obj);
+                    UpdateBenefit();
                 }));
             }
         }
@@ -43,6 +60,7 @@ namespace Kouzi.Scripts.Model
                 return addEquipmentCommand ?? (addEquipmentCommand = new RelayCommand(obj =>
                 {
                     EquipmentList.AddEquipment(new Equipment(), this);
+                    UpdateBenefit();
                 }));
             }
         }
@@ -110,7 +128,16 @@ namespace Kouzi.Scripts.Model
 
         #region Equipments
 
-        public EquipmentCollection EquipmentList { get; set; } = new EquipmentCollection();
+        private EquipmentCollection equipmentList = new EquipmentCollection();
+        public EquipmentCollection EquipmentList
+        {
+            get => equipmentList;
+            set
+            {
+                equipmentList = value;
+                OnPropertyChanged("EquipmentList");
+            }
+        }
 
         #endregion
 
@@ -154,6 +181,21 @@ namespace Kouzi.Scripts.Model
             {
                 selectedIndex = value;
                 OnPropertyChanged("SelectedIndex");
+            }
+        }
+
+        #endregion
+
+        #region Benefit
+
+        private int benefit;
+        public int Benefit
+        {
+            get => GetBenefit();
+            set
+            {
+                benefit = value;
+                OnPropertyChanged("Benefit");
             }
         }
 

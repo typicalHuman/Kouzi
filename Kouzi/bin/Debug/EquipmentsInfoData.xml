@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ArrayOfEquipment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Equipment>
+    <Index>-1</Index>
+    <Diff>0</Diff>
+    <MySum>0</MySum>
+    <MyCost>2</MyCost>
+    <Sum>0</Sum>
+    <Cost>3</Cost>
+    <Count>0</Count>
+    <Name>fdsf</Name>
+  </Equipment>
+  <Equipment>
+    <Index>-1</Index>
+    <Diff>1809540</Diff>
+    <MySum>129750</MySum>
+    <MyCost>4325</MyCost>
+    <Sum>1939290</Sum>
+    <Cost>64643</Cost>
+    <Count />
+    <Name>asdf</Name>
+  </Equipment>
+</ArrayOfEquipment>
