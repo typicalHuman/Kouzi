@@ -1,29 +1,33 @@
 ﻿using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Kouzi.Scripts.Model;
 
 namespace Kouzi.Scripts.Other
 {
+    /// <summary>
+    /// Class for equipment sheet.
+    /// </summary>
     public class EquipmentSheet : SheetBase
     {
 
-        public override void SetData(ref object[,] data)
+        #region Constants
+
+        private const string SHEET_NAME = "Оборудование";
+
+        #endregion
+
+        public override void SetData()
         {
             data = new object[rows, columns];
             for (int i = 1; i < rows; i++)
             {
                 Equipment equip = App.EquipmentsResultPageVM.EquipmentsList[i - 1];
-                data[i, 0] = equip.Name;
-                data[i, 1] = equip.Count;
-                data[i, 2] = equip.Cost;
-                data[i, 3] = equip.Sum;
-                data[i, 4] = equip.MyCost;
-                data[i, 5] = equip.MySum;
-                data[i, 6] = equip.Diff;
+                data[i, Equipment.EQUIP_NAME_INDEX] = equip.Name;
+                data[i, Equipment.EQUIP_COUNT_INDEX] = equip.Count;
+                data[i, Equipment.EQUIP_COST_INDEX] = equip.Cost;
+                data[i, Equipment.EQUIP_SUM_INDEX] = equip.Sum;
+                data[i, Equipment.EQUIP_MYCOST_INDEX] = equip.MyCost;
+                data[i, Equipment.EQUIP_MYSUM_INDEX] = equip.MySum;
+                data[i, Equipment.EQUIP_DIFF_INDEX] = equip.Diff;
             }
         }
 
@@ -36,17 +40,22 @@ namespace Kouzi.Scripts.Other
 
         public override void SetSheet()
         {
-            Sheet.Name = "Оборудование";
-            Range start = (Range)Sheet.Cells[1, 1];
-            Range end = (Range)Sheet.Cells[rows, columns];
-            Sheet.Range[start, end].Value2 = GetData();
+            SetSheetContent();
             SetAlignment(rows + 1);
             SetButtomLine(rows);
             SetVerticalLines(rows, columns + 1);
             Sheet.Columns.AutoFit();
         }
 
-        public override void SetTitle(ref object[,] data, int index)
+        private void SetSheetContent()
+        {
+            Sheet.Name = SHEET_NAME;
+            Range start = (Range)Sheet.Cells[1, 1];
+            Range end = (Range)Sheet.Cells[rows, columns];
+            Sheet.Range[start, end].Value2 = GetData();
+        }
+
+        public override void SetTitle(int index)
         {
             for(int i = 3; i < title.Length - 1; i++)
             {

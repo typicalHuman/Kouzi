@@ -161,8 +161,15 @@ namespace Kouzi.Scripts.Other
             // check to kill the right process
             foreach (Process ExcelProcess in AllProcesses)
             {
-                if (new Hashtable().ContainsKey(ExcelProcess.Id) == false)
-                    ExcelProcess.Kill();
+                try
+                {
+                    if (new Hashtable().ContainsKey(ExcelProcess.Id) == false)
+                        ExcelProcess.Kill();
+                }
+                catch (Win32Exception)
+                {
+
+                }
             }
 
             AllProcesses = null;

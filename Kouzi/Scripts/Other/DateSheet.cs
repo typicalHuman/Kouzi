@@ -2,23 +2,35 @@
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kouzi.Scripts.Other
 {
+    /// <summary>
+    /// Class for date sheet.
+    /// </summary>
     class DateSheet : SheetBase
     {
+        #region Properties
 
         private List<DateTime>[] dates { get; set; }
 
-        private string[] months = {"Январь", "Февраль", "Март", 
-                                   "Апрель", "Май", "Июнь", 
+        private string[] months { get; set; } = {"Январь", "Февраль", "Март",
+                                   "Апрель", "Май", "Июнь",
                                    "Июль", "Август", "Сентябрь",
                                    "Октябрь", "Ноябрь", "Декабрь"};
 
-        public override void SetData(ref object[,] data)
+        #endregion
+
+        #region Constants
+
+        private const string SHEET_NAME = "По датам";
+
+        private const int CELL_WIDTH = 45;
+
+        #endregion
+
+
+        public override void SetData()
         {
             data = new object[rows, DateWorkHelper.GetMaxDaysInMonths(dates) + 1];
             int currentRow = 0;
@@ -27,23 +39,23 @@ namespace Kouzi.Scripts.Other
                 if (dates[i] != null)
                 {
                     columns = dates[i].Count + 1;
-                    SetMonthData(ref data, ref currentRow, i);
+                    SetMonthData(ref currentRow, i);
                 }
             }
         }
 
-        private void SetMonthData(ref object[,] data, ref int row, int monthIndex)
+        private void SetMonthData(ref int row, int monthIndex)
         {
             int startRow = row + 1;
             data[row, 0] = months[monthIndex];
             SetButtomLine(row + 1);
             SetTopLine(row + 1);
-            SetDays(ref data, ref row, monthIndex);
-            SetEquipment(ref data, ref row, startRow);
-            SetCount(ref data, row, startRow, monthIndex);
+            SetDays(ref row, monthIndex);
+            SetEquipment(ref row, startRow);
+            SetCount(row, startRow, monthIndex);
         }
 
-        private void SetCount(ref object[,] data, int row, int startRow, int monthIndex)
+        private void SetCount(int row, int startRow, int monthIndex)
         {
             for(int i = 0; i < row - startRow - 1; i++)
             {
@@ -79,13 +91,12 @@ namespace Kouzi.Scripts.Other
 
         private DateTime GetDateFromString(string date)
         {
-            DateTime result;
-            if (DateTime.TryParse(date, out result))
+            if (DateTime.TryParse(date, out DateTime result))
                 return result;
             return default(DateTime);
         }
 
-        private void SetDays(ref object[,] data, ref int row, int monthIndex)
+        private void SetDays(ref int row, int monthIndex)
         {
             for (int i = 1; i < dates[monthIndex].Count + 1; i++)
             {
@@ -94,7 +105,7 @@ namespace Kouzi.Scripts.Other
             row++;
         }
 
-        private void SetEquipment(ref object[,] data, ref int row, int startRow)
+        private void SetEquipment(ref int row, int startRow)
         {
             for (int k = 0; k < App.MainPageVM.EquipmentsInfo.Count; k++)
             {
@@ -126,7 +137,7 @@ namespace Kouzi.Scripts.Other
 
         public override void SetSheet()
         {
-            Sheet.Name = "По датам";
+            Sheet.Name = SHEET_NAME;
             if(rows != 0 && columns != 0)
             {
                 try
@@ -138,14 +149,15 @@ namespace Kouzi.Scripts.Other
                     Sheet.Columns.AutoFit();
                     start = (Range)Sheet.Cells[1, 2];
                     end = (Range)Sheet.Cells[rows, DateWorkHelper.GetMaxDaysInMonths(dates) + 1];
-                    Sheet.Range[start, end].UseStandardWidth = 45;
+                    Sheet.Range[start, end].UseStandardWidth = CELL_WIDTH;
                 }
                 catch (Exception) { }
             }
         }
 
-        public override void SetTitle(ref object[,] data, int rowIndex = 0)
+        public override void SetTitle(int rowIndex = 0)
         {
+            throw new NotImplementedException();
         }
     }
 }

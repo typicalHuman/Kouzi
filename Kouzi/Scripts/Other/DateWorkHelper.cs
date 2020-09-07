@@ -1,25 +1,30 @@
 ﻿using Kouzi.Scripts.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kouzi.Scripts.Other
 {
+    /// <summary>
+    /// Helper class to work with dates.
+    /// </summary>
     class DateWorkHelper
     {
+        #region Constants
+
+        private const int MONTH_COUNT = 12;
+
+        #endregion
+
         public static List<DateTime>[] GetDatesByMonths()
         {
-            List<DateTime>[] dates = new List<DateTime>[12];
+            List<DateTime>[] dates = new List<DateTime>[MONTH_COUNT];
             App.EquipmentsResultPageVM.SetEquipmentsList();
             for (int j = 0; j < App.MainPageVM.Buyers.Count; j++)
             {
                 for (int i = 0; i < App.MainPageVM.Buyers[j].EquipmentList.Count; i++)
                 {
-                    DateTime date;
                     Equipment equip = App.MainPageVM.Buyers[j].EquipmentList[i];
-                    if (DateTime.TryParse(equip.Date, out date))
+                    if (DateTime.TryParse(equip.Date, out DateTime date))
                     {
                         date = DateTime.Parse(equip.Date);
                         if (dates[date.Month - 1] == null)
@@ -39,9 +44,7 @@ namespace Kouzi.Scripts.Other
             int k;
             for(int i = 0; i < dates.Length; i++)
             {
-                for(k = 0; dates[i] != null && k < dates[i].Count; k++)
-                {
-                }
+                for (k = 0; dates[i] != null && k < dates[i].Count; k++) ;
                 if (k > max)
                     max = k;
             }
@@ -50,7 +53,7 @@ namespace Kouzi.Scripts.Other
 
         private static void RemoveSame(ref List<DateTime>[] dates)
         {
-            for(int i = 0; i < 12; i++)
+            for(int i = 0; i < MONTH_COUNT; i++)
             {
                 for(int k = 0; dates[i] != null && k < dates[i].Count; k++)
                 {
@@ -65,7 +68,7 @@ namespace Kouzi.Scripts.Other
 
         private static void Sort(ref List<DateTime>[] dates)
         {
-            for(int i = 0; i < 12; i++)
+            for(int i = 0; i < MONTH_COUNT; i++)
             {
                 for (int k = 0; dates[i] != null && k < dates[i].Count; k++)
                 {

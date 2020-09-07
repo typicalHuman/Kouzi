@@ -21,7 +21,7 @@ namespace Kouzi.Scripts.Other
             return base.GetData();
         }
 
-        public override void SetData(ref object[,] data)
+        public override void SetData()
         {
             data = new object[rows, columns];
             int cellI, i, k;
@@ -80,7 +80,7 @@ namespace Kouzi.Scripts.Other
             rows = cellI + 1;
         }
 
-        public override void SetTitle(ref object[,] data, int buyerIndex)
+        public override void SetTitle(int buyerIndex)
         {
             for (int i = 0; i < columns - 1; i++)
                 data[0, i] = title[i];

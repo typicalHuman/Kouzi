@@ -12,7 +12,19 @@ namespace Kouzi.Scripts.Model
     [Serializable]
     public class Equipment : INotifyPropertyChanged, ICloneable, IEquatable<Equipment>
     {
-     
+
+        #region Constants
+        /// <summary>
+        /// Constants for index of cell in excel sheet.
+        /// </summary>
+        public const int EQUIP_NAME_INDEX = 0;
+        public const int EQUIP_COUNT_INDEX = 1;
+        public const int EQUIP_COST_INDEX = 2;
+        public const int EQUIP_SUM_INDEX = 3;
+        public const int EQUIP_MYCOST_INDEX = 4;
+        public const int EQUIP_MYSUM_INDEX = 5;
+        public const int EQUIP_DIFF_INDEX = 6;
+        #endregion
 
         #region Properties
 
